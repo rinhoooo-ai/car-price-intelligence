@@ -41,7 +41,7 @@ car-price-intelligence/
 |---|--------|------|--------|-------|
 | 1.1 | ✅ Done | Identify raw dataset | `Data/vehicles.csv` | Craigslist used cars, 426 881 rows × 26 cols |
 | 1.2 | ✅ Done | Write Colab data-cleaning notebook | `Cleaning/craigslist_cleaning.ipynb` | T4-compatible; steps below |
-| 1.3 | ✅ Done | Ingest cleaned data into MongoDB Atlas | `scripts/mongo_ingest.py` | listings + price_snapshots + TTL cache; see `docs/mongo_setup.md` |
+| 1.3 | ✅ Done | Ingest cleaned data into MongoDB Atlas | `scripts/mongo_ingest.py` | 328,209 listings · 61,721 snapshots · 175 MB / 512 MB used; see `docs/mongo_setup.md` |
 
 #### Cleaning notebook steps (`craigslist_cleaning.ipynb`)
 
@@ -158,4 +158,4 @@ npm run dev
 
 ---
 
-*Last updated: 2026-02-21 — Phase 1 complete (data cleaning + MongoDB ingest)*
+*Last updated: 2026-02-21 — Phase 1 complete (data cleaning + MongoDB ingest · 175 MB / 512 MB Atlas M0)*
