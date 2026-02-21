@@ -211,5 +211,6 @@ Data/*.csv
 Data/*.parquet
 Data/*.json
 *.csv
-models/*.pkl
-models/*.png
+
+# Model artefacts tracked in git (all <10 MB — safe for GitHub)
+# models/*.pkl and models/*.png are committed intentionally
