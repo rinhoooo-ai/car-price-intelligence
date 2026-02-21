@@ -9,14 +9,22 @@ Data-driven car price intelligence platform that tracks market trends and predic
 ```
 car-price-intelligence/
 │
-├── Data/                        # Raw & cleaned datasets
+├── Data/                        # Raw & cleaned datasets (git-ignored, stored in Drive)
 │   ├── vehicles.csv             # Raw Craigslist used cars (~426k rows, 26 cols)
 │   └── cleaned_cars.csv         # Output of cleaning pipeline
 │
-├── backend/                     # FastAPI app and ML logic
-├── frontend/                    # React dashboard
-├── docs/                        # Project documentation
-└── scripts/                     # Scraping utilities
+├── Cleaning/
+│   └── craigslist_cleaning.ipynb  # Colab T4 data-cleaning notebook
+│
+├── scripts/
+│   └── mongo_ingest.py          # Ingest cleaned_cars.csv → MongoDB Atlas
+│
+├── docs/
+│   └── mongo_setup.md           # Step-by-step Atlas + .env setup guide
+│
+├── backend/                     # FastAPI app and ML logic (coming Phase 5)
+├── frontend/                    # React dashboard (coming Phase 6)
+└── .env                         # Local secrets — never committed
 ```
 
 ---
@@ -32,7 +40,8 @@ car-price-intelligence/
 | # | Status | Task | Output | Notes |
 |---|--------|------|--------|-------|
 | 1.1 | ✅ Done | Identify raw dataset | `Data/vehicles.csv` | Craigslist used cars, 426 881 rows × 26 cols |
-| 1.2 | ✅ Done | Write Colab data-cleaning notebook | `craigslist_cleaning.ipynb` | T4-compatible; steps below |
+| 1.2 | ✅ Done | Write Colab data-cleaning notebook | `Cleaning/craigslist_cleaning.ipynb` | T4-compatible; steps below |
+| 1.3 | ✅ Done | Ingest cleaned data into MongoDB Atlas | `scripts/mongo_ingest.py` | listings + price_snapshots + TTL cache; see `docs/mongo_setup.md` |
 
 #### Cleaning notebook steps (`craigslist_cleaning.ipynb`)
 
@@ -149,4 +158,4 @@ npm run dev
 
 ---
 
-*Last updated: 2026-02-21*
+*Last updated: 2026-02-21 — Phase 1 complete (data cleaning + MongoDB ingest)*
