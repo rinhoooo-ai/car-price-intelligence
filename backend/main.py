@@ -20,6 +20,22 @@ from backend.agent import run_agent
 load_dotenv(_ROOT / ".env")
 
 app = FastAPI(title="Car Price Intelligence API")
+
+
+@app.on_event("startup")
+async def _clean_stale_cache():
+    """
+    Remove any cached predictions that have a run_forecast error inside
+    tool_outputs (written before the linear-extrapolation fallback was added).
+    This forces a fresh analysis the next time that car is queried.
+    """
+    result = await _db["predictions_cache"].delete_many(
+        {"tool_outputs.run_forecast.error": {"$exists": True}}
+    )
+    if result.deleted_count:
+        print(f"[startup] Purged {result.deleted_count} stale cache entries with forecast errors")
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -183,8 +199,11 @@ async def predict(
 ):
     key = hashlib.md5(f"{make}{model}{year}{mileage}{condition}{region}".encode()).hexdigest()
     cached = await _db["predictions_cache"].find_one({"cache_key": key})
-    # Only use cache if it contains a valid recommendation (not a stale error result)
-    if cached and cached.get("recommendation") in ("BUY", "WAIT", "NEUTRAL"):
+    # Reject cache if: no valid recommendation OR run_forecast still has an error inside
+    _forecast_errored = bool(
+        (cached or {}).get("tool_outputs", {}).get("run_forecast", {}).get("error")
+    )
+    if cached and cached.get("recommendation") in ("BUY", "WAIT", "NEUTRAL") and not _forecast_errored:
         return _safe(cached)
 
     query = f"Should I buy a {year} {make} {model} with {mileage:,} miles in {condition} condition in {region}?"
