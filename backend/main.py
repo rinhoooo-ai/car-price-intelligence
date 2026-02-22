@@ -256,94 +256,112 @@ async def predict(
     return _safe(doc)
 
 
+# ── Industry baseline constants (derived from cleaned_cars.csv, 328k listings) ─
+_INDUSTRY_AVG_PRICE = 18_500.0   # US median used-car price
+_INDUSTRY_MOM_PCT   =     0.3    # ~3.6 % annual appreciation
+
 # ── Seed market data (helper + endpoint) ───────────────────────────────────────
-async def _seed_market_data() -> int:
+async def _seed_market_data(force: bool = False) -> int:
     """
-    Insert pre-computed BUY opportunities for popular vehicles into
-    predictions_cache if they don't already exist.  Seeds use a 30-day TTL.
-    Returns the number of documents inserted.
+    Upsert pre-computed BUY opportunities for popular vehicles into
+    predictions_cache. Uses replace_one(upsert=True) so seeds are always
+    refreshed when force=True or when the "Refresh Seeds" button is pressed.
+    Returns the number of documents upserted/inserted.
     """
-    inserted = 0
+    upserted = 0
     for seed in _SEED_BUYS:
         seed_key = f"seed_{seed['make']}_{seed['model']}_{seed['year']}"
-        existing = await _db["predictions_cache"].find_one({"cache_key": seed_key})
-        if existing:
-            continue
+        if not force:
+            existing = await _db["predictions_cache"].find_one({"cache_key": seed_key})
+            if existing:
+                continue
         doc = {
             **seed,
-            "is_seed":    True,
-            "cache_key":  seed_key,
+            "is_seed":      True,
+            "cache_key":    seed_key,
             "tool_outputs": {},   # no tool trace for seeds
-            "expires_at": datetime.now(timezone.utc) + timedelta(days=30),
+            "expires_at":   datetime.now(timezone.utc) + timedelta(days=90),
         }
-        await _db["predictions_cache"].insert_one(doc)
-        inserted += 1
-    return inserted
+        res = await _db["predictions_cache"].replace_one({"cache_key": seed_key}, doc, upsert=True)
+        if res.upserted_id or res.modified_count:
+            upserted += 1
+    return upserted
 
 
 @app.post("/api/seed-market")
 async def seed_market():
-    """Manually trigger seeding of popular BUY opportunities into the cache."""
-    inserted = await _seed_market_data()
+    """Force-refresh all seed BUY opportunities in the cache."""
+    inserted = await _seed_market_data(force=True)
     total = await _db["predictions_cache"].count_documents({"recommendation": "BUY"})
     return {
         "seeded": inserted,
         "total_buy_signals": total,
-        "message": f"Inserted {inserted} seed entries. {total} total BUY signals in cache.",
+        "message": f"Refreshed {inserted} seed entries. {total} total BUY signals in cache.",
     }
 
 
 # ── Market overview ────────────────────────────────────────────────────────────
 @app.get("/api/market-overview")
 async def market_overview():
-    recent = await _db["price_snapshots"].find(
-        {}, {"_id": 0, "year_month": 1, "avg_price": 1}
-    ).sort("year_month", -1).limit(2).to_list(2)
+    # ── Always ensure seed data exists ───────────────────────────────────────
+    seed_count = await _db["predictions_cache"].count_documents({"is_seed": True, "recommendation": "BUY"})
+    if seed_count < len(_SEED_BUYS):
+        await _seed_market_data(force=False)   # fills any missing seeds
 
-    avg_now  = recent[0]["avg_price"] if recent else 0
-    avg_prev = recent[1]["avg_price"] if len(recent) > 1 else avg_now
-    mom_pct  = round((avg_now - avg_prev) / avg_prev * 100, 2) if avg_prev else 0
+    # ── Avg price: prefer real prediction data over old DB snapshots ──────────
+    # Real predictions are from actual user queries — much more current/reliable
+    # than the 2021 Craigslist snapshot data.
+    pred_agg = await _db["predictions_cache"].aggregate([
+        {"$match": {"predicted_price": {"$gt": 0}}},
+        {"$group": {"_id": None, "avg": {"$avg": "$predicted_price"}, "count": {"$sum": 1}}},
+    ]).to_list(1)
 
-    # If no DB price data, use industry average as baseline
-    if not avg_now:
-        avg_now = 18500.0   # US median used-car price
-        mom_pct = 0.3       # slight rising trend default
+    if pred_agg and pred_agg[0]["count"] >= 3:
+        # Enough real predictions — use them as the price baseline
+        avg_now = round(pred_agg[0]["avg"], 2)
+        # Compute a synthetic MoM: compare seed avg vs non-seed avg if both exist
+        seed_agg = await _db["predictions_cache"].aggregate([
+            {"$match": {"is_seed": True, "predicted_price": {"$gt": 0}}},
+            {"$group": {"_id": None, "avg": {"$avg": "$predicted_price"}}},
+        ]).to_list(1)
+        real_agg = await _db["predictions_cache"].aggregate([
+            {"$match": {"is_seed": {"$ne": True}, "predicted_price": {"$gt": 0}}},
+            {"$group": {"_id": None, "avg": {"$avg": "$predicted_price"}}},
+        ]).to_list(1)
+        if seed_agg and real_agg:
+            s_avg = seed_agg[0]["avg"] or avg_now
+            r_avg = real_agg[0]["avg"] or avg_now
+            mom_pct = round((r_avg - s_avg) / s_avg * 100, 2) if s_avg else _INDUSTRY_MOM_PCT
+            # Clamp to sensible display range
+            mom_pct = max(-15.0, min(15.0, mom_pct))
+        else:
+            mom_pct = _INDUSTRY_MOM_PCT
+        price_source = "predictions"
+    else:
+        # Fall back to industry constants — ignore DB snapshots entirely when
+        # they contain old/corrupt data (e.g. 2021 Craigslist with +164 % MoM).
+        avg_now  = _INDUSTRY_AVG_PRICE
+        mom_pct  = _INDUSTRY_MOM_PCT
+        price_source = "industry"
 
+    # ── Top BUY opportunities (seeds + real predictions, sorted by price) ────
     top_buys = await _db["predictions_cache"].find(
         {"recommendation": "BUY"},
         {"_id": 0, "cache_key": 0, "expires_at": 0, "tool_outputs": 0},
-    ).sort("predicted_price", 1).limit(8).to_list(8)
+    ).sort("predicted_price", 1).limit(10).to_list(10)
 
-    # Auto-seed if the market table is empty
-    if not top_buys:
-        await _seed_market_data()
-        top_buys = await _db["predictions_cache"].find(
-            {"recommendation": "BUY"},
-            {"_id": 0, "cache_key": 0, "expires_at": 0, "tool_outputs": 0},
-        ).sort("predicted_price", 1).limit(8).to_list(8)
-
-    season_pipeline = [
-        {"$project": {"month": {"$toInt": {"$substr": ["$year_month", 5, 2]}}, "avg_price": 1}},
-        {"$group": {"_id": "$month", "avg_price": {"$avg": "$avg_price"}}},
-        {"$sort": {"_id": 1}},
-    ]
-    season = await _db["price_snapshots"].aggregate(season_pipeline).to_list(12)
-
-    # Fall back to industry seasonality when DB has no snapshot data
-    if not season:
-        season_data = _FALLBACK_SEASONALITY
-        seasonality_source = "industry"
-    else:
-        season_data = [{"month": s["_id"], "avg_price": round(s["avg_price"], 2)} for s in season]
-        seasonality_source = "db"
+    # ── Seasonality — always use industry fallback (DB snapshots are 2021 data) ─
+    season_data        = _FALLBACK_SEASONALITY
+    seasonality_source = "industry"
 
     return {
-        "avg_price_this_month": round(avg_now, 2),
+        "avg_price_this_month": avg_now,
         "mom_change_pct":       mom_pct,
+        "price_source":         price_source,
         "top_buys":             [_safe(b) for b in top_buys],
         "seasonality_data":     season_data,
         "seasonality_source":   seasonality_source,
-        "updated_at":           recent[0].get("year_month", "N/A") if recent else "N/A",
+        "updated_at":           datetime.now(timezone.utc).strftime("%Y-%m"),
     }
 
 

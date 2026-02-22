@@ -434,7 +434,9 @@ export default function MarketPage() {
 
   const seasonMin  = Math.min(...(data.seasonality_data?.map(s => s.avg_price) ?? [0]))
   const seasonMax  = Math.max(...(data.seasonality_data?.map(s => s.avg_price) ?? [1]))
-  const heatScore  = Math.min(100, Math.max(0, Math.round(50 + (data.mom_change_pct ?? 0) * 5)))
+  // Clamp MoM to ±15% before computing heat score to prevent extreme values
+  const momClamped = Math.max(-15, Math.min(15, data.mom_change_pct ?? 0))
+  const heatScore  = Math.min(100, Math.max(0, Math.round(50 + momClamped * 3)))
   const isHot      = heatScore > 65
   const isCool     = heatScore < 35
   const heatColor  = isHot ? 'text-red-400' : isCool ? 'text-blue-400' : 'text-amber-400'
@@ -462,6 +464,16 @@ export default function MarketPage() {
             <div className="bg-slate-800/70 border border-slate-700 rounded-xl p-6">
               <p className="text-slate-400 text-sm mb-1 flex items-center gap-1.5">
                 <DollarSign size={13} /> Avg Market Price
+                {data.price_source === 'predictions' && (
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-medium ml-1">
+                    Live
+                  </span>
+                )}
+                {data.price_source === 'industry' && (
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-600/40 text-slate-400 border border-slate-600/40 font-medium ml-1">
+                    Baseline
+                  </span>
+                )}
               </p>
               <p className="text-4xl font-extrabold text-white">
                 $<AnimatedCounter end={Math.round(data.avg_price_this_month || 0)} />
