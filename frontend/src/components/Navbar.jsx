@@ -1,0 +1,52 @@
+import { NavLink } from 'react-router-dom'
+import { Car, BarChart3, Cpu, TrendingUp } from 'lucide-react'
+
+const links = [
+  { to: '/',       label: 'Analyze',      icon: TrendingUp, end: true },
+  { to: '/market', label: 'Market',       icon: BarChart3,  end: false },
+  { to: '/tech',   label: 'How It Works', icon: Cpu,        end: false },
+]
+
+export default function Navbar() {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <NavLink to="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:bg-blue-500 transition-colors">
+              <Car size={18} className="text-white" />
+            </div>
+            <span className="text-xl font-bold text-white tracking-tight">
+              Car<span className="text-blue-400">Intel</span>
+            </span>
+            <span className="hidden sm:block text-xs text-slate-500 border border-slate-700 px-1.5 py-0.5 rounded-full font-medium">
+              AI
+            </span>
+          </NavLink>
+
+          {/* Nav links */}
+          <div className="flex items-center gap-1">
+            {links.map(({ to, label, icon: Icon, end }) => (
+              <NavLink
+                key={to}
+                to={to}
+                end={end}
+                className={({ isActive }) =>
+                  `flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
+                    isActive
+                      ? 'bg-blue-500/15 text-blue-400 border border-blue-500/20'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`
+                }
+              >
+                <Icon size={15} />
+                {label}
+              </NavLink>
+            ))}
+          </div>
+        </div>
+      </div>
+    </nav>
+  )
+}
