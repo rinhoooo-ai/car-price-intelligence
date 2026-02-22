@@ -64,7 +64,13 @@ function AgentTimeline({ toolOutputs }) {
       {steps.map(([tool, output], idx) => {
         const meta    = TOOL_META[tool] || { Icon: Activity, label: tool, desc: '' }
         const { Icon } = meta
-        const hasErr  = !!output?.error
+        // Detect real errors vs graceful fallbacks
+        const hasErr    = !!output?.error
+        // get_price_history returns an array; check first element for "no data" info
+        const noHistory = tool === 'get_price_history' && Array.isArray(output) && output[0]?.error
+        // run_forecast using fallback (market_avg / industry_default) — not an error, show as estimated
+        const isFallback = tool === 'run_forecast' && !hasErr &&
+          (output?.method === 'market_avg' || output?.method === 'industry_default' || output?.method === 'linear')
         const isLast  = idx === steps.length - 1
 
         return (
@@ -72,7 +78,9 @@ function AgentTimeline({ toolOutputs }) {
             {/* Timeline spine */}
             <div className="flex flex-col items-center flex-shrink-0">
               <div className={`w-7 h-7 rounded-full flex items-center justify-center mt-1
-                ${hasErr ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'}`}>
+                ${hasErr ? 'bg-red-500/20 text-red-400'
+                  : noHistory || isFallback ? 'bg-amber-500/20 text-amber-400'
+                  : 'bg-blue-500/20 text-blue-400'}`}>
                 <Icon size={13} />
               </div>
               {!isLast && <div className="w-px flex-1 bg-slate-700/60 my-1" />}
@@ -84,13 +92,19 @@ function AgentTimeline({ toolOutputs }) {
                 <span className="text-sm font-semibold text-white">{meta.label}</span>
                 <span className="text-xs text-slate-600">{meta.desc}</span>
                 <span className={`text-xs px-1.5 py-0.5 rounded font-medium
-                  ${hasErr ? 'bg-red-500/15 text-red-400' : 'bg-emerald-500/15 text-emerald-400'}`}>
-                  {hasErr ? 'error' : 'ok'}
+                  ${hasErr ? 'bg-red-500/15 text-red-400'
+                    : noHistory ? 'bg-amber-500/15 text-amber-400'
+                    : isFallback ? 'bg-amber-500/15 text-amber-400'
+                    : 'bg-emerald-500/15 text-emerald-400'}`}>
+                  {hasErr ? 'error' : noHistory ? 'no history' : isFallback ? 'estimated' : 'ok'}
                 </span>
               </div>
 
               {/* Inline key outputs */}
-              {!hasErr && tool === 'run_forecast' && output.forecast_30d && (
+              {noHistory && (
+                <p className="text-xs text-amber-400/70 mt-0.5 italic">No price history — using market-wide estimates</p>
+              )}
+              {!hasErr && !noHistory && tool === 'run_forecast' && output.forecast_30d && (
                 <div className="flex flex-wrap gap-3 mt-1 text-xs text-slate-500">
                   <span>30d: <span className={output.trend_pct_change >= 0 ? 'text-emerald-400' : 'text-red-400'}>
                     ${output.forecast_30d?.toLocaleString()}
@@ -101,6 +115,7 @@ function AgentTimeline({ toolOutputs }) {
                   <span className="capitalize">{output.trend_direction} <span className={output.trend_pct_change >= 0 ? 'text-emerald-400' : 'text-red-400'}>
                     {output.trend_pct_change > 0 ? '+' : ''}{output.trend_pct_change}%
                   </span></span>
+                  {isFallback && <span className="text-amber-400/70 capitalize">{output.method?.replace('_', ' ')}</span>}
                 </div>
               )}
               {!hasErr && tool === 'run_price_prediction' && output.predicted_price && (
@@ -562,7 +577,12 @@ export default function AnalyzePage() {
                           </span>
                           <span className={`text-xs font-bold
                             ${f.direction === 'increases price' ? 'text-emerald-400' : 'text-red-400'}`}>
-                            {f.direction === 'increases price' ? '+' : '-'}{Math.abs(f.impact).toFixed(0)}
+                            {f.direction === 'increases price' ? '+' : '−'}$
+                            {Math.abs(f.impact) >= 100
+                              ? Math.round(Math.abs(f.impact)).toLocaleString()
+                              : Math.abs(f.impact) >= 1
+                                ? Math.abs(f.impact).toFixed(1)
+                                : Math.abs(f.impact).toFixed(2)}
                           </span>
                         </div>
                       ))}

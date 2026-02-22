@@ -26,15 +26,24 @@ app = FastAPI(title="Car Price Intelligence API")
 @app.on_event("startup")
 async def _clean_stale_cache():
     """
-    Remove any cached predictions that have a run_forecast error inside
-    tool_outputs (written before the linear-extrapolation fallback was added).
-    This forces a fresh analysis the next time that car is queried.
+    Remove stale cached predictions:
+      1. Entries with a run_forecast error (old behaviour before linear-extrapolation fallback).
+      2. NEUTRAL entries where price is ≥10% below market median — these may now qualify as
+         BUY under the updated signal logic and should be re-analysed.
     """
-    result = await _db["predictions_cache"].delete_many(
+    r1 = await _db["predictions_cache"].delete_many(
         {"tool_outputs.run_forecast.error": {"$exists": True}}
     )
-    if result.deleted_count:
-        print(f"[startup] Purged {result.deleted_count} stale cache entries with forecast errors")
+    # Also clear any NEUTRAL entries that could flip to BUY under the new ≥10% rule.
+    # The price_vs_median_pct lives inside tool_outputs.get_market_context.
+    r2 = await _db["predictions_cache"].delete_many({
+        "recommendation": "NEUTRAL",
+        "is_seed": {"$ne": True},   # keep seed data
+        "tool_outputs.get_market_context.price_vs_median_pct": {"$lte": -10},
+    })
+    total = r1.deleted_count + r2.deleted_count
+    if total:
+        print(f"[startup] Purged {r1.deleted_count} forecast-error + {r2.deleted_count} stale-NEUTRAL cache entries")
 
 
 app.add_middleware(
@@ -211,7 +220,17 @@ async def predict(
     _forecast_errored = bool(
         (cached or {}).get("tool_outputs", {}).get("run_forecast", {}).get("error")
     )
-    if cached and cached.get("recommendation") in ("BUY", "WAIT", "NEUTRAL") and not _forecast_errored:
+    # Also reject NEUTRAL if price is ≥10% below market median (may now qualify as BUY)
+    _stale_neutral = (
+        (cached or {}).get("recommendation") == "NEUTRAL"
+        and not (cached or {}).get("is_seed", False)
+        and float(
+            (cached or {}).get("tool_outputs", {})
+            .get("get_market_context", {})
+            .get("price_vs_median_pct", 0)
+        ) <= -10
+    )
+    if cached and cached.get("recommendation") in ("BUY", "WAIT", "NEUTRAL") and not _forecast_errored and not _stale_neutral:
         return _safe(cached)
 
     query = f"Should I buy a {year} {make} {model} with {mileage:,} miles in {condition} condition in {region}?"

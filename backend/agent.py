@@ -496,7 +496,19 @@ def synthesize_recommendation(
         pct_vs_med = round((float(predicted_price) - _INDUSTRY_AVG) / _INDUSTRY_AVG * 100, 2)
 
     # ── Core BUY / WAIT / NEUTRAL logic ──────────────────────────────────────
-    if effective_trend == "rising" and pct_vs_med < 0:
+    # Strong-deal override: listing is significantly below market regardless of trend
+    if pct_vs_med <= -10:
+        signal     = "BUY"
+        confidence = "HIGH" if pct_vs_med <= -15 else "MODERATE"
+        if llm_best_time_to_buy == "now":
+            confidence = "HIGH"
+        rationale  = (
+            f"This listing is {abs(pct_vs_med):.1f}% below the market median — "
+            f"a compelling deal regardless of short-term price direction. "
+            f"Strong value opportunity: buy before inventory tightens."
+        )
+
+    elif effective_trend == "rising" and pct_vs_med < 0:
         signal     = "BUY"
         confidence = "HIGH" if pct_vs_med < -5 else "MODERATE"
         # LLM can boost confidence
