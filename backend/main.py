@@ -190,9 +190,13 @@ async def cars():
         {"$sort": {"make": 1, "model": 1, "year": -1}},
     ]
     db_results = await _db["listings"].aggregate(pipeline).to_list(5000)
-    # Fall back to the static catalog generated from the CSV when MongoDB
-    # listings collection is empty (e.g. ingest not yet run on this machine)
-    return db_results if db_results else _CAR_CATALOG
+    # Always merge DB results with the static catalog so all 20 makes appear
+    # even when MongoDB listings is partially ingested (e.g. missing Ford/Jeep).
+    # DB entries take priority; catalog fills any gaps.
+    seen = {(r["make"], r["model"], r["year"]) for r in db_results}
+    extras = [r for r in _CAR_CATALOG if (r["make"], r["model"], r["year"]) not in seen]
+    combined = db_results + extras
+    return sorted(combined, key=lambda r: (r.get("make") or "", r.get("model") or "", -(r.get("year") or 0)))
 
 
 # ── Predict / analyse ──────────────────────────────────────────────────────────
