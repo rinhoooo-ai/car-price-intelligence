@@ -216,3 +216,7 @@ Data/*.json
 # models/*.pkl and models/*.png are committed intentionally
 frontend/node_modules/
 frontend/dist/
+
+# Local demo / judge notes — keep off remote
+DEMO_PAIRS.md
+.claude/
