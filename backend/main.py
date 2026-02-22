@@ -15,7 +15,8 @@ from dotenv import load_dotenv
 
 _ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_ROOT))
-from backend.agent import run_agent
+from backend.agents.orchestrator import run_orchestrator
+from backend.utils.validation import validate_predict_params
 from backend.car_catalog import CATALOG as _CAR_CATALOG
 
 load_dotenv(_ROOT / ".env")
@@ -207,28 +208,32 @@ async def predict(
     make: str, model: str, year: int,
     mileage: int = 50000, condition: str = "good", region: str = "california",
 ):
+    # ── Input validation ──────────────────────────────────────────────────────
+    errors = validate_predict_params(
+        {"make": make, "model": model, "year": year, "mileage": mileage,
+         "condition": condition, "region": region}
+    )
+    if errors:
+        raise HTTPException(status_code=422, detail="; ".join(errors))
+
     key = hashlib.md5(f"{make}{model}{year}{mileage}{condition}{region}".encode()).hexdigest()
     cached = await _db["predictions_cache"].find_one({"cache_key": key})
-    # Reject cache if: no valid recommendation OR run_forecast still has an error inside
+    # Reject cache if forecast errored
     _forecast_errored = bool(
         (cached or {}).get("tool_outputs", {}).get("run_forecast", {}).get("error")
     )
-    # Also reject NEUTRAL if price is ≥10% below market median (may now qualify as BUY)
-    _stale_neutral = (
-        (cached or {}).get("recommendation") == "NEUTRAL"
-        and not (cached or {}).get("is_seed", False)
-        and float(
-            (cached or {}).get("tool_outputs", {})
-            .get("get_market_context", {})
-            .get("price_vs_median_pct", 0)
-        ) <= -10
+    # Accept cache if it has a final_recommendation (new schema) or legacy recommendation
+    _has_result = bool(
+        (cached or {}).get("final_recommendation") or
+        (cached or {}).get("recommendation") in ("BUY", "WAIT", "NEUTRAL")
     )
-    if cached and cached.get("recommendation") in ("BUY", "WAIT", "NEUTRAL") and not _forecast_errored and not _stale_neutral:
+    if cached and _has_result and not _forecast_errored:
         return _safe(cached)
 
-    query = f"Should I buy a {year} {make} {model} with {mileage:,} miles in {condition} condition in {region}?"
     try:
-        result = await asyncio.to_thread(run_agent, query)
+        result = await asyncio.to_thread(
+            run_orchestrator, make, model, year, mileage, condition, region
+        )
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))
 
