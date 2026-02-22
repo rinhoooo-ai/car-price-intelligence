@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
   ComposedChart, Area, Line, XAxis, YAxis, CartesianGrid,
@@ -9,7 +9,8 @@ import {
   Package, Activity, Cpu, CheckCircle, AlertCircle,
   Sparkles, Car, Database, Scale, BarChart2,
 } from 'lucide-react'
-import { getCars, getPrediction } from '../api'
+import { getPrediction } from '../api'
+import { CAR_CATALOG } from '../carCatalog'
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 const CONDITIONS = ['excellent', 'good', 'fair', 'salvage']
@@ -140,7 +141,6 @@ function AgentTimeline({ toolOutputs }) {
 export default function AnalyzePage() {
   const [searchParams] = useSearchParams()
 
-  const [cars,    setCars]    = useState([])
   const [form,    setForm]    = useState({
     make: '', model: '', year: '', mileage: 50000, condition: 'good', region: 'california',
   })
@@ -148,9 +148,6 @@ export default function AnalyzePage() {
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState(null)
   const [stage,   setStage]   = useState(0)
-
-  // Load car catalogue
-  useEffect(() => { getCars().then(r => setCars(r.data)).catch(() => {}) }, [])
 
   // Pre-fill from URL params (Market page click-through)
   useEffect(() => {
@@ -162,14 +159,11 @@ export default function AnalyzePage() {
     }
   }, [searchParams])
 
-  const makes  = useMemo(() => [...new Set(cars.map(c => c.make))].sort(), [cars])
-  const models = useMemo(() =>
-    [...new Set(cars.filter(c => c.make === form.make).map(c => c.model))].sort()
-  , [cars, form.make])
-  const years  = useMemo(() =>
-    [...new Set(cars.filter(c => c.make === form.make && c.model === form.model).map(c => c.year))]
-      .sort((a, b) => b - a)
-  , [cars, form.make, form.model])
+  // Derive makes / models / years directly from the bundled static catalog —
+  // no API call needed, always shows all 20 makes including Ford and Jeep.
+  const makes  = useMemo(() => Object.keys(CAR_CATALOG).sort(), [])
+  const models = useMemo(() => Object.keys(CAR_CATALOG[form.make] || {}).sort(), [form.make])
+  const years  = useMemo(() => (CAR_CATALOG[form.make]?.[form.model] || []), [form.make, form.model])
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
