@@ -176,7 +176,7 @@ export default function MarketTrendsPage() {
             </div>
           </div>
 
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={380}>
             <AreaChart data={filteredMonthly} margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
               <defs>
                 <linearGradient id="usedGrad" x1="0" y1="0" x2="0" y2="1">
@@ -214,7 +214,7 @@ export default function MarketTrendsPage() {
           <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
             <h2 className="text-white font-bold text-lg mb-1">12-Month Price Trend by Make</h2>
             <p className="text-slate-400 text-sm mb-4">Jeep leads appreciation; Honda steady; Ford/Toyota stable</p>
-            <ResponsiveContainer width="100%" height={240}>
+            <ResponsiveContainer width="100%" height={280}>
               <LineChart data={MAKE_TRENDS_12M} margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                 <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#64748b' }} />
@@ -233,7 +233,7 @@ export default function MarketTrendsPage() {
           <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
             <h2 className="text-white font-bold text-lg mb-1">Price by Segment (Dec 2024)</h2>
             <p className="text-slate-400 text-sm mb-4">EVs still premium-priced; trucks remain highest ICE segment</p>
-            <ResponsiveContainer width="100%" height={240}>
+            <ResponsiveContainer width="100%" height={280}>
               <BarChart data={SEGMENTS} layout="vertical" margin={{ left: 10, right: 40 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
                 <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} />
@@ -257,10 +257,10 @@ export default function MarketTrendsPage() {
             California commands a $6,300 premium over Missouri — regional demand, regulations, and income levels drive disparity.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={480}>
               <BarChart data={REGIONAL_PRICES} layout="vertical" margin={{ left: 10, right: 60 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} />
+                <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} domain={[12000, 'auto']} />
                 <YAxis type="category" dataKey="region" width={110} tick={{ fontSize: 11, fill: '#cbd5e1' }} />
                 <Tooltip {...chartStyle} formatter={v => [`$${Number(v).toLocaleString()}`, 'Avg price']} />
                 <Bar dataKey="avg" radius={[0, 4, 4, 0]}>
@@ -269,7 +269,7 @@ export default function MarketTrendsPage() {
               </BarChart>
             </ResponsiveContainer>
 
-            <div className="space-y-2">
+            <div className="space-y-2 overflow-y-auto" style={{maxHeight: '480px'}}>
               {REGIONAL_PRICES.map(r => (
                 <div key={r.region} className="flex items-center gap-3 p-3 bg-slate-900/60 rounded-xl border border-slate-700">
                   <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: r.color }} />
