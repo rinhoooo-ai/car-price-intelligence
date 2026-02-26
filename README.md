@@ -308,13 +308,13 @@ This project was built for the **Principled AI** hackathon track. Every design d
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  PRINCIPLE                    IMPLEMENTATION                                 │
+│  PRINCIPLE                    │ IMPLEMENTATION                              │
 ├───────────────────────────────┬─────────────────────────────────────────────┤
 │  Surgical LLM use             │ GPT-4o-mini called only in ForecastAgent    │
 │                               │ (blending) + ExplanationAgent (language).   │
 │                               │ Never routes, never decides, never scores.  │
 ├───────────────────────────────┼─────────────────────────────────────────────┤
-│  Deterministic decisions      │ DecisionAgent: 3 Python rules, 0 LLM.      │
+│  Deterministic decisions      │ DecisionAgent: 3 Python rules, 0 LLM.       │
 │                               │ Same input → same output, always.           │
 ├───────────────────────────────┼─────────────────────────────────────────────┤
 │  Bias audit on every call     │ EthicsAgent runs on every prediction.       │
