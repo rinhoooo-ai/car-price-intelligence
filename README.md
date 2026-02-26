@@ -512,7 +512,7 @@ OPENAI_API_KEY=sk-...
 <div align="center">
 
 
-**Built for the ASU Principled AI Hackathon 2026**
+## **Built for the ASU Principled AI Hackathon 2026**
 
 | Name | Email |
 |:---|:---|
