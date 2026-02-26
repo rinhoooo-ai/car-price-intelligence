@@ -40,9 +40,14 @@ async def _clean_stale_cache():
     print(f"[startup] Refreshed {seeded} seed BUY entries")
 
 
+_CORS_ORIGINS = ["http://localhost:5173"]
+_frontend_url = os.environ.get("FRONTEND_URL", "")
+if _frontend_url:
+    _CORS_ORIGINS.append(_frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=_CORS_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
