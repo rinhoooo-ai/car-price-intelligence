@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚗 CarIntel AI
+# Vroomly
 
-### *Principled Multi-Agent Decision Intelligence for the Used-Car Market*
+### *Multi-agent AI platform for Used-Car Market*
 
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
@@ -15,7 +15,7 @@
 
 <br/>
 
-> **Tell us the car. We tell you whether to buy today, wait, or keep watching — with full reasoning, risk score, 90-day forecast, and an ethics audit on every single prediction.**
+> **"Tell us the car. We tell you whether to buy today, wait, or keep watching."**
 
 <br/>
 
@@ -31,13 +31,12 @@
 
 ## ⚡ What Is This?
 
-CarIntel AI is a **production-grade microservice intelligence platform** that answers one question every used-car buyer has:
+**Vroomly** is a **responsible AI decision-support system** for used-car buyers. It predicts **fair market price**, forecasts **future price trends**, and tells users whether they should **buy now or wait**.
 
-> *"Is this a good deal right now — or should I wait?"*
+Vroomly operationalizes **Principled Innovation** by making every financial recommendation **transparent, deterministic, and accountable**.
 
-It does so through a **7-agent Python orchestration pipeline** that combines XGBoost price modeling, Facebook Prophet time-series forecasting, and GPT-4o-mini natural language reasoning — all coordinated by a deterministic state machine with Redis caching, Pub/Sub event dispatch, and Circuit Breaker fault isolation.
-
-**LLM is used surgically** — only for blending forecasts and generating plain-English explanations. Routing, decisions, and risk scoring are 100% deterministic Python. Every recommendation is traceable to exact numerical thresholds.
+- LLM is only used for *explanations*.
+- Every buy/wait suggestion is **traceable** to numerical thresholds.
 
 <br/>
 
@@ -514,6 +513,13 @@ OPENAI_API_KEY=sk-...
 
 **Built for the ASU Principled AI Hackathon 2026**
 
-*shreerajbhamareASU · sbhamar2@asu.edu*
+**Built for the ASU Principled AI Hackathon 2026**
+
+| Name | Email |
+|:---|:---|
+| Shreeraj Bhamare | sbhamar2@asu.edu |
+| Shubhadip Saha | ssaha124@asu.edu |
+| Harsh Sharma | hsharm68@asu.edu |
+| Hung Dang Pham | dpham129@asu.edu |
 
 </div>
