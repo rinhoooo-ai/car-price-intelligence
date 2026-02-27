@@ -26,10 +26,10 @@ const STATIC_SHAP = [
 
 // Decision rules
 const DECISION_RULES = [
-  { cond: 'change ≤ −3% AND confidence ≥ 75', result: 'WAIT',    badge: 'bg-red-500 text-red-700 border-red-500/25',     desc: 'Price declining with high confidence.' },
-  { cond: 'change ≥ +2% AND volatility = Low', result: 'BUY NOW', badge: 'bg-emerald-600 text-emerald-700 border-emerald-500/25', desc: 'Rising prices with stable market.' },
-  { cond: 'price ≤ −10% vs median AND conf ≥ 75', result: 'BUY NOW', badge: 'bg-emerald-600 text-emerald-700 border-emerald-500/25', desc: 'Strong below-market deal.' },
-  { cond: 'All other scenarios',              result: 'MONITOR', badge: 'bg-amber-500 text-amber-700 border-amber-500', desc: 'No strong signal — keep watching.' },
+  { cond: 'change ≤ −3% AND confidence ≥ 75', result: 'WAIT',    badge: 'bg-red-500 text-white border-red-500/25',     desc: 'Price declining with high confidence.' },
+  { cond: 'change ≥ +2% AND volatility = Low', result: 'BUY NOW', badge: 'bg-emerald-600 text-white border-emerald-500/25', desc: 'Rising prices with stable market.' },
+  { cond: 'price ≤ −10% vs median AND conf ≥ 75', result: 'BUY NOW', badge: 'bg-emerald-600 text-white border-emerald-500/25', desc: 'Strong below-market deal.' },
+  { cond: 'All other scenarios',              result: 'MONITOR', badge: 'bg-amber-500 text-white border-amber-500', desc: 'No strong signal — keep watching.' },
 ]
 
 const MODEL_ROWS = [
@@ -88,13 +88,13 @@ export default function TechPage() {
           <div className="flex items-center gap-2 mb-1">
             <Layers size={18} className="text-orange-500" />
             <h2 className="text-xl font-bold text-slate-900">Microservice Architecture</h2>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-orange-600 text-orange-500 border border-orange-600 font-semibold ml-1">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-orange-600 text-white border border-orange-600 font-semibold ml-1">
               Animated
             </span>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-violet-600 text-violet-700 border border-violet-500/20 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-violet-600 text-white border border-violet-500/20 font-semibold">
               Pub/Sub
             </span>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-red-500 text-red-700 border border-red-500 font-semibold">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-red-500 text-white border border-red-500 font-semibold">
               Circuit Breaker
             </span>
           </div>
@@ -110,7 +110,7 @@ export default function TechPage() {
           <div className="flex items-center gap-2 mb-2">
             <Scale size={18} className="text-orange-500" />
             <h2 className="text-xl font-bold text-slate-900">Decision Rules</h2>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-600 text-emerald-700 border border-emerald-600 font-semibold ml-1">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-600 text-white border border-emerald-600 font-semibold ml-1">
               Deterministic · Auditable
             </span>
           </div>

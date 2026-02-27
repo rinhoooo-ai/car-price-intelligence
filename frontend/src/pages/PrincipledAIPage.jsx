@@ -12,35 +12,35 @@ const HITL_STEPS = [
     title: 'AI Generates Recommendation',
     desc: '7-agent pipeline runs XGBoost + Prophet + GPT-4o-mini to produce a BUY NOW / WAIT / MONITOR signal with confidence score, risk assessment, and reasoning.',
     badge: 'Automated',
-    badgeColor: 'bg-amber-500 text-amber-600',
+    badgeColor: 'bg-amber-500 text-white',
   },
   {
     id: 2, Icon: Eye, color: '#3b82f6',
     title: 'Transparency Layer',
     desc: 'Every recommendation includes confidence %, volatility level, uncertainty range, forecast method label, and 3-bullet reasoning — so humans can evaluate the evidence.',
     badge: 'Transparent',
-    badgeColor: 'bg-orange-600 text-orange-500',
+    badgeColor: 'bg-orange-600 text-white',
   },
   {
     id: 3, Icon: User, color: '#f59e0b',
     title: 'Human Reviews Evidence',
     desc: 'The buyer sees the full agent reasoning log, SHAP factors, bias statement, and scenario simulations. They can run what-if analyses before deciding.',
     badge: 'Human Review',
-    badgeColor: 'bg-amber-500 text-amber-700',
+    badgeColor: 'bg-amber-500 text-white',
   },
   {
     id: 4, Icon: CheckCircle, color: '#10b981',
     title: 'Human Makes Final Decision',
     desc: 'AI output is advisory only. The human decides whether to act, modify the search, or seek a second opinion. No autonomous purchasing or commitment.',
     badge: 'Human Decision',
-    badgeColor: 'bg-emerald-600 text-emerald-700',
+    badgeColor: 'bg-emerald-600 text-white',
   },
   {
     id: 5, Icon: RefreshCw, color: '#8b5cf6',
     title: 'Feedback Loop',
     desc: 'Users can flag incorrect recommendations. This feedback improves future model calibration and helps identify regional data gaps or systematic biases.',
     badge: 'Continuous Learning',
-    badgeColor: 'bg-purple-600 text-purple-700',
+    badgeColor: 'bg-purple-600 text-white',
   },
 ]
 
@@ -267,7 +267,7 @@ export default function PrincipledAIPage() {
               <div className="flex items-center gap-2 mb-4">
                 <Bot size={16} className="text-amber-600" />
                 <span className="text-sm font-semibold text-amber-600">AI Agent Output</span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500 text-amber-600 border border-amber-500">Advisory Only</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500 text-white border border-amber-500">Advisory Only</span>
               </div>
 
               <div className="flex items-start justify-between mb-4">
@@ -342,7 +342,7 @@ export default function PrincipledAIPage() {
               </div>
 
               {reviewDecision && (
-                <div className="bg-emerald-600 border border-emerald-600 rounded-lg p-3 text-xs text-emerald-700">
+                <div className="bg-emerald-600 border border-emerald-600 rounded-lg p-3 text-xs text-white">
                   {reviewDecision === 'accept' && 'You accepted the AI recommendation. Remember: this is your decision, not the AI\'s.'}
                   {reviewDecision === 'more' && 'Good choice. Explore the scenario simulator or compare regional prices before deciding.'}
                   {reviewDecision === 'wait' && 'You\'ve overridden the AI. Human judgment prevails — the AI was advisory only.'}
@@ -361,10 +361,10 @@ export default function PrincipledAIPage() {
                 <div className="mt-3 space-y-2">
                   <p className="text-xs text-slate-500">Rate the AI recommendation quality:</p>
                   <div className="flex gap-2">
-                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-emerald-600 text-emerald-700 text-xs hover:bg-emerald-600 transition-colors">
+                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-emerald-600 text-white text-xs hover:bg-emerald-600 transition-colors">
                       <ThumbsUp size={12} /> Helpful
                     </button>
-                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-red-500 text-red-700 text-xs hover:bg-red-500 transition-colors">
+                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-red-500 text-white text-xs hover:bg-red-500 transition-colors">
                       <ThumbsDown size={12} /> Not helpful
                     </button>
                   </div>

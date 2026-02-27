@@ -71,11 +71,11 @@ function seasonColor(value, min, max) {
 function ForecastBadge({ method }) {
   if (!method) return null
   const cfg = {
-    llm_blended:      { label: 'AI Enhanced', cls: 'bg-purple-600 text-purple-700 border-purple-500' },
-    statistical:      { label: 'Statistical',  cls: 'bg-orange-600   text-orange-500   border-orange-600'   },
-    prophet:          { label: 'Prophet',      cls: 'bg-amber-500 text-amber-600 border-amber-500' },
-    linear:           { label: 'Extrapolated', cls: 'bg-amber-500  text-amber-700  border-amber-500'  },
-    market_avg:       { label: 'Market Avg',   cls: 'bg-cyan-600   text-cyan-700   border-cyan-500/20'   },
+    llm_blended:      { label: 'AI Enhanced', cls: 'bg-purple-600 text-white border-purple-500' },
+    statistical:      { label: 'Statistical',  cls: 'bg-orange-600   text-white   border-orange-600'   },
+    prophet:          { label: 'Prophet',      cls: 'bg-amber-500 text-white border-amber-500' },
+    linear:           { label: 'Extrapolated', cls: 'bg-amber-500  text-white  border-amber-500'  },
+    market_avg:       { label: 'Market Avg',   cls: 'bg-cyan-600   text-white   border-cyan-500/20'   },
     industry_default: { label: 'Industry Est', cls: 'bg-slate-500/15  text-slate-600  border-slate-500/20'  },
   }
   const { label, cls } = cfg[method] || { label: method, cls: 'bg-slate-500/15 text-slate-600 border-slate-500/20' }
@@ -479,7 +479,7 @@ export default function MarketPage() {
               <p className="text-slate-600 text-sm mb-1 flex items-center gap-1.5">
                 <DollarSign size={13} /> Avg Market Price
                 {data.price_source === 'predictions' && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-emerald-700 border border-emerald-600 font-medium ml-1">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-white border border-emerald-600 font-medium ml-1">
                     Live
                   </span>
                 )}
@@ -601,7 +601,7 @@ export default function MarketPage() {
                       <ForecastBadge method={row.forecast_method} />
                     </td>
                     <td className="px-4 py-4">
-                      <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-emerald-700 border border-emerald-500/25">
+                      <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-white border border-emerald-500/25">
                         BUY
                       </span>
                     </td>
@@ -619,7 +619,7 @@ export default function MarketPage() {
               <button
                 onClick={handleReseed}
                 disabled={seeding}
-                className="mt-3 flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-orange-700 hover:bg-orange-600 text-slate-900 text-xs font-semibold transition-colors disabled:opacity-50"
+                className="mt-3 flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-orange-700 hover:bg-orange-600 text-white text-xs font-semibold transition-colors disabled:opacity-50"
               >
                 <Sparkles size={12} />
                 {seeding ? 'Seeding…' : 'Populate with Pre-computed Signals'}
@@ -634,7 +634,7 @@ export default function MarketPage() {
             <div className="flex items-center gap-2 mb-4">
               <Sparkles size={16} className="text-purple-700" />
               <h2 className="text-lg font-bold text-slate-900">AI Market Insights</h2>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-600 text-purple-700 border border-purple-500 font-semibold">GPT-4o-mini</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-600 text-white border border-purple-500 font-semibold">GPT-4o-mini</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {data.top_buys.filter(b => b.llm_key_insight).slice(0, 4).map((b, i) => (

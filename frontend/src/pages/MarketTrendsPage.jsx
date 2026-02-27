@@ -167,7 +167,7 @@ export default function MarketTrendsPage() {
                 <button key={opt.key} onClick={() => setChartView(opt.key)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     chartView === opt.key
-                      ? 'bg-orange-600 text-orange-500 border border-orange-600'
+                      ? 'bg-orange-600 text-white border border-orange-600'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-600'
                   }`}>
                   {opt.label}

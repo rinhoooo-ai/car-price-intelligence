@@ -56,31 +56,31 @@ const AGENT_ICONS = {
 // Demo vehicles — matched to CAR_CATALOG keys + static data map
 const DEMO_VEHICLES = [
   { make:'toyota',    model:'camry',    year:2020, mileage:42000, condition:'good', region:'texas',
-    tag:'MONITOR',  tagGrad:'from-amber-500 to-yellow-600',  tagText:'text-amber-700',
+    tag:'MONITOR',  tagGrad:'from-amber-500 to-yellow-600',  tagText:'text-white',
     label:'Toyota Camry',    desc:'Stable demand, balanced market conditions', stat:'+0.8% / 90d', emoji:'🚗' },
   { make:'honda',     model:'civic',    year:2020, mileage:55000, condition:'good', region:'florida',
-    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-emerald-700',
+    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-white',
     label:'Honda Civic',     desc:'10% below market median — strong value pick', stat:'−10.2% vs median', emoji:'🏁' },
   { make:'ford',      model:'f-150',    year:2019, mileage:68000, condition:'good', region:'texas',
-    tag:'WAIT',     tagGrad:'from-red-500 to-rose-600',      tagText:'text-red-700',
+    tag:'WAIT',     tagGrad:'from-red-500 to-rose-600',      tagText:'text-white',
     label:'Ford F-150',      desc:'Truck prices softening nationally', stat:'−3.4% / 90d', emoji:'🛻' },
   { make:'jeep',      model:'wrangler', year:2020, mileage:45000, condition:'good', region:'ohio',
-    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-emerald-700',
+    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-white',
     label:'Jeep Wrangler',   desc:'Rising demand, constrained inventory', stat:'+6.8% / 90d', emoji:'⛰️' },
   { make:'bmw',       model:'3 series', year:2020, mileage:48000, condition:'good', region:'new york',
-    tag:'WAIT',     tagGrad:'from-red-500 to-rose-600',      tagText:'text-red-700',
+    tag:'WAIT',     tagGrad:'from-red-500 to-rose-600',      tagText:'text-white',
     label:'BMW 3 Series',    desc:'Luxury segment softening post rate hike', stat:'−2.8% / 90d', emoji:'🏎️' },
   { make:'toyota',    model:'tacoma',   year:2020, mileage:38000, condition:'good', region:'california',
-    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-emerald-700',
+    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-white',
     label:'Toyota Tacoma',   desc:'Highest resale momentum of any truck', stat:'+7.4% / 90d', emoji:'🏔️' },
   { make:'honda',     model:'accord',   year:2020, mileage:38000, condition:'good', region:'illinois',
-    tag:'MONITOR',  tagGrad:'from-amber-500 to-yellow-600',  tagText:'text-amber-700',
+    tag:'MONITOR',  tagGrad:'from-amber-500 to-yellow-600',  tagText:'text-white',
     label:'Honda Accord',    desc:'Balanced supply and demand, neutral signal', stat:'+0.5% / 90d', emoji:'🛣️' },
   { make:'chevrolet', model:'malibu',   year:2019, mileage:65000, condition:'good', region:'ohio',
-    tag:'WAIT',     tagGrad:'from-red-500 to-rose-600',      tagText:'text-red-700',
+    tag:'WAIT',     tagGrad:'from-red-500 to-rose-600',      tagText:'text-white',
     label:'Chevy Malibu',    desc:'Sedan market declining, wait for floor', stat:'−4.2% / 90d', emoji:'📉' },
   { make:'toyota',    model:'rav4',     year:2020, mileage:35000, condition:'good', region:'california',
-    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-emerald-700',
+    tag:'BUY NOW',  tagGrad:'from-emerald-500 to-green-600', tagText:'text-white',
     label:'Toyota RAV4',     desc:'SUV demand growing, buy before it rises', stat:'+4.1% / 90d', emoji:'🚙' },
 ]
 
@@ -488,10 +488,10 @@ function AgentReasoningLog({ agentLog }) {
         const isLast   = idx === agentLog.length - 1
         const isOrch   = entry.agent === 'OrchestratorAgent'
         const statusColor = entry.status === 'ok'
-          ? 'bg-orange-600 text-orange-500'
+          ? 'bg-orange-600 text-white'
           : entry.status === 'fallback'
-            ? 'bg-amber-500 text-amber-700'
-            : 'bg-red-500 text-red-700'
+            ? 'bg-amber-500 text-white'
+            : 'bg-red-500 text-white'
 
         return (
           <div key={idx} className="flex gap-3">
@@ -505,9 +505,9 @@ function AgentReasoningLog({ agentLog }) {
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-semibold text-slate-900">{entry.agent}</span>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
-                  entry.status === 'ok' ? 'bg-emerald-600 text-emerald-700' :
-                  entry.status === 'fallback' ? 'bg-amber-500 text-amber-700' :
-                  'bg-red-500 text-red-700'
+                  entry.status === 'ok' ? 'bg-emerald-600 text-white' :
+                  entry.status === 'fallback' ? 'bg-amber-500 text-white' :
+                  'bg-red-500 text-white'
                 }`}>{entry.status}</span>
               </div>
               <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">{entry.message}</p>
@@ -557,7 +557,7 @@ function ScenarioPanel({ basePct, projectedPrice }) {
             onClick={() => setActive(active === s.key ? null : s.key)}
             className={`text-left p-3 rounded-xl border text-xs transition-all ${
               active === s.key
-                ? 'bg-orange-600 border-orange-500/40 text-blue-300'
+                ? 'bg-orange-600 border-orange-500/40 text-white'
                 : 'bg-[#F5F0E8]/60 border-slate-200 text-slate-600 hover:border-slate-300'
             }`}>
             <div className="font-semibold mb-0.5">{s.label}</div>
@@ -808,7 +808,7 @@ export default function AnalyzePage() {
                 className={`flex items-center gap-2 px-7 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                   loading || !form.make || !form.model || !form.year
                     ? 'bg-slate-100 text-slate-500 cursor-not-allowed'
-                    : 'bg-orange-700 hover:bg-orange-600 text-slate-900 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40'
+                    : 'bg-orange-700 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40'
                 }`}
               >
                 {loading
@@ -981,14 +981,14 @@ export default function AnalyzePage() {
                   {forecastMethod && (
                     <span className={`text-xs px-2.5 py-1 rounded-full font-semibold border ${
                       forecastMethod === 'llm_blended'
-                        ? 'bg-purple-600 text-purple-700 border-purple-500'
+                        ? 'bg-purple-600 text-white border-purple-500'
                         : forecastMethod === 'prophet'
-                          ? 'bg-amber-500 text-amber-600 border-amber-500'
+                          ? 'bg-amber-500 text-white border-amber-500'
                           : forecastMethod === 'linear'
-                            ? 'bg-amber-500 text-amber-700 border-amber-500'
+                            ? 'bg-amber-500 text-white border-amber-500'
                             : forecastMethod === 'industry_default'
                               ? 'bg-slate-500/15 text-slate-600 border-slate-500/20'
-                              : 'bg-orange-600 text-orange-500 border-orange-600'
+                              : 'bg-orange-600 text-white border-orange-600'
                     }`}>
                       {forecastMethod === 'llm_blended'      ? '✦ AI-Enhanced' :
                        forecastMethod === 'prophet'           ? 'Prophet Model' :
@@ -1152,7 +1152,7 @@ export default function AnalyzePage() {
                 <h3 className="text-slate-900 font-semibold mb-5 flex items-center gap-2">
                   <Cpu size={16} className="text-orange-500" />
                   Agent Reasoning Log
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-600 text-orange-500 border border-orange-600 font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-600 text-white border border-orange-600 font-semibold">
                     {agentLog ? agentLog.length : '—'} agents
                   </span>
                 </h3>

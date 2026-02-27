@@ -271,7 +271,7 @@ export default function EconomicImpactPage() {
               <button key={i} onClick={() => setScaleTier(i)}
                 className={`p-4 rounded-xl border text-left transition-all ${
                   scaleTier === i
-                    ? 'bg-amber-500 border-amber-500/40 text-amber-700'
+                    ? 'bg-amber-500 border-amber-500/40 text-white'
                     : 'bg-[#F5F0E8]/60 border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}>
                 <p className="text-xs font-medium mb-1">{s.label}</p>

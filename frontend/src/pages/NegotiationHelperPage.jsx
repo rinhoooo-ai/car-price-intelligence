@@ -44,7 +44,7 @@ export default function NegotiationHelperPage() {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 bg-amber-500 border border-amber-500 text-amber-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+          <div className="inline-flex items-center gap-2 bg-amber-500 border border-amber-500 text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
             <Clock size={13} />
             Coming Soon
           </div>
@@ -68,7 +68,7 @@ export default function NegotiationHelperPage() {
           {STEPS.map(({ step, label }, i) => (
             <div key={step} className="flex items-center gap-3">
               <div className="flex items-center gap-2.5">
-                <span className="w-7 h-7 rounded-full bg-orange-600 border border-orange-600 flex items-center justify-center text-orange-500 text-xs font-bold flex-shrink-0">
+                <span className="w-7 h-7 rounded-full bg-orange-600 border border-orange-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                   {step}
                 </span>
                 <span className="text-slate-600 text-sm font-medium whitespace-nowrap">{label}</span>

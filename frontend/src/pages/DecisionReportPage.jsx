@@ -202,7 +202,7 @@ export default function DecisionReportPage() {
               <button key={v.id} onClick={() => setSelectedId(v.id)}
                 className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                   selectedId === v.id
-                    ? 'bg-orange-600 border-orange-500/40 text-blue-300'
+                    ? 'bg-orange-600 border-orange-500/40 text-white'
                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}>
                 {v.label}
@@ -213,7 +213,7 @@ export default function DecisionReportPage() {
 
           <div className="flex gap-3">
             <button onClick={handlePrint}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-700 hover:bg-orange-600 text-slate-900 font-semibold text-sm transition-all shadow-lg shadow-orange-500/20">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-700 hover:bg-orange-600 text-white font-semibold text-sm transition-all shadow-lg shadow-orange-500/20">
               <Download size={15} />
               Download PDF Report
             </button>
@@ -342,7 +342,7 @@ export default function DecisionReportPage() {
           <h3 className="text-slate-900 font-semibold mb-5 flex items-center gap-2">
             <Cpu size={16} className="text-orange-500" />
             Agent Reasoning Chain
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-600 text-orange-500 border border-orange-600 font-semibold">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-600 text-white border border-orange-600 font-semibold">
               {agent_log.length} agents
             </span>
           </h3>
@@ -350,7 +350,7 @@ export default function DecisionReportPage() {
             {agent_log.map((entry, idx) => {
               const IconComp = AGENT_ICONS[entry.agent] || Activity
               const isLast   = idx === agent_log.length - 1
-              const scColor  = entry.status === 'ok' ? 'bg-orange-600 text-orange-500' : 'bg-amber-500 text-amber-700'
+              const scColor  = entry.status === 'ok' ? 'bg-orange-600 text-white' : 'bg-amber-500 text-white'
               return (
                 <div key={idx} className="flex gap-3">
                   <div className="flex flex-col items-center flex-shrink-0">
@@ -363,7 +363,7 @@ export default function DecisionReportPage() {
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold text-slate-900">{entry.agent}</span>
                       <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
-                        entry.status === 'ok' ? 'bg-emerald-600 text-emerald-700' : 'bg-amber-500 text-amber-700'
+                        entry.status === 'ok' ? 'bg-emerald-600 text-white' : 'bg-amber-500 text-white'
                       }`}>{entry.status}</span>
                     </div>
                     <p className="text-[11px] text-slate-500 mt-0.5">{entry.message}</p>
