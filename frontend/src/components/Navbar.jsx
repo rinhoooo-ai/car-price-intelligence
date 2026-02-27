@@ -19,14 +19,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <NavLink to="/" className="flex items-center gap-2.5 group flex-shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:bg-blue-500 transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-orange-700 flex items-center justify-center shadow-lg shadow-orange-700/30 group-hover:bg-orange-600 transition-colors">
               <Car size={18} className="text-white" />
             </div>
             <span className="text-xl font-bold text-white tracking-tight">
-              Car<span className="text-blue-400">Intel</span>
-            </span>
-            <span className="hidden sm:block text-xs text-slate-500 border border-slate-700 px-1.5 py-0.5 rounded-full font-medium">
-              AI
+              Vroom<span className="text-orange-400">ly</span>
             </span>
           </NavLink>
 
@@ -40,7 +37,7 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-medium transition-all duration-150 whitespace-nowrap flex-shrink-0 ${
                     isActive
-                      ? 'bg-blue-500/15 text-blue-400 border border-blue-500/20'
+                      ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                       : 'text-slate-400 hover:text-white hover:bg-slate-800'
                   }`
                 }

@@ -72,8 +72,8 @@ function ForecastBadge({ method }) {
   if (!method) return null
   const cfg = {
     llm_blended:      { label: 'AI Enhanced', cls: 'bg-purple-500/15 text-purple-400 border-purple-500/20' },
-    statistical:      { label: 'Statistical',  cls: 'bg-blue-500/15   text-blue-400   border-blue-500/20'   },
-    prophet:          { label: 'Prophet',      cls: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/20' },
+    statistical:      { label: 'Statistical',  cls: 'bg-orange-500/10   text-orange-500   border-orange-500/20'   },
+    prophet:          { label: 'Prophet',      cls: 'bg-amber-500/15 text-amber-600 border-amber-500/20' },
     linear:           { label: 'Extrapolated', cls: 'bg-amber-500/15  text-amber-400  border-amber-500/20'  },
     market_avg:       { label: 'Market Avg',   cls: 'bg-cyan-500/15   text-cyan-400   border-cyan-500/20'   },
     industry_default: { label: 'Industry Est', cls: 'bg-slate-500/15  text-slate-600  border-slate-500/20'  },
@@ -156,7 +156,7 @@ function USManufacturerMap({ onStateSelect, selectedState }) {
         >
           <p className="font-bold text-slate-900 text-sm mb-1">{ttData.name}</p>
           <p className="text-slate-600 mb-2">
-            Avg price: <span className="text-blue-400 font-semibold">${ttData.avg_price.toLocaleString()}</span>
+            Avg price: <span className="text-orange-500 font-semibold">${ttData.avg_price.toLocaleString()}</span>
             <span className="text-slate-600 ml-2">·</span>
             <span className="text-slate-600 ml-2">{ttData.total_listings.toLocaleString()} listings</span>
           </p>
@@ -228,7 +228,7 @@ function StatePlayground({ initialState }) {
           <select
             value={selState}
             onChange={e => { setSelState(e.target.value); setSelMake('') }}
-            className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
+            className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none"
           >
             <option value="">Select a state…</option>
             {sortedStates.map(([abbr, d]) => (
@@ -245,7 +245,7 @@ function StatePlayground({ initialState }) {
             value={selMake}
             onChange={e => setSelMake(e.target.value)}
             disabled={!selState}
-            className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
+            className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none disabled:opacity-40"
           >
             <option value="">All top 3</option>
             {makes.map(m => (
@@ -351,7 +351,7 @@ function StatePlayground({ initialState }) {
               return (
                 <div key={m.make}
                   className={`rounded-xl border p-4 transition-all cursor-pointer
-                    ${selMake === m.make ? 'border-blue-500/50 bg-blue-500/8' : 'border-slate-200/80 bg-[#F5F0E8]/40'}
+                    ${selMake === m.make ? 'border-orange-500/50 bg-orange-600/8' : 'border-slate-200/80 bg-[#F5F0E8]/40'}
                     ${isFiltered ? 'opacity-30' : ''}`}
                   onClick={() => setSelMake(selMake === m.make ? '' : m.make)}
                 >
@@ -453,8 +453,8 @@ export default function MarketPage() {
   const heatScore  = Math.min(100, Math.max(0, Math.round(50 + momClamped * 3)))
   const isHot      = heatScore > 65
   const isCool     = heatScore < 35
-  const heatColor  = isHot ? 'text-red-400' : isCool ? 'text-blue-400' : 'text-amber-400'
-  const heatBarClr = isHot ? 'bg-red-500'   : isCool ? 'bg-blue-500'   : 'bg-amber-500'
+  const heatColor  = isHot ? 'text-red-400' : isCool ? 'text-orange-500' : 'text-amber-400'
+  const heatBarClr = isHot ? 'bg-red-500'   : isCool ? 'bg-orange-600'   : 'bg-amber-500'
   const heatLabel  = isHot ? "Hot — seller's market" : isCool ? "Cool — buyer's market" : "Balanced market"
   const hasSeedData = data.top_buys?.some(b => b.is_seed)
 
@@ -465,7 +465,7 @@ export default function MarketPage() {
       <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
-            Market <span className="text-blue-400">Overview</span>
+            Market <span className="text-orange-500">Overview</span>
           </h1>
           <p className="text-slate-600 text-base mb-8 max-w-2xl">
             Real-time car market signals · Craigslist listing snapshot · Updated {data.updated_at}
@@ -588,7 +588,7 @@ export default function MarketPage() {
                     <td className="px-4 py-4 font-semibold text-slate-900 capitalize">{row.make}</td>
                     <td className="px-4 py-4 text-slate-600 capitalize">{row.model}</td>
                     <td className="px-4 py-4 text-slate-600">{row.year}</td>
-                    <td className="px-4 py-4 font-bold text-blue-400">
+                    <td className="px-4 py-4 font-bold text-orange-500">
                       {row.predicted_price ? `$${Number(row.predicted_price).toLocaleString()}` : '—'}
                     </td>
                     <td className="px-4 py-4 text-emerald-400 font-medium">
@@ -619,7 +619,7 @@ export default function MarketPage() {
               <button
                 onClick={handleReseed}
                 disabled={seeding}
-                className="mt-3 flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-slate-900 text-xs font-semibold transition-colors disabled:opacity-50"
+                className="mt-3 flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-orange-700 hover:bg-orange-600 text-slate-900 text-xs font-semibold transition-colors disabled:opacity-50"
               >
                 <Sparkles size={12} />
                 {seeding ? 'Seeding…' : 'Populate with Pre-computed Signals'}
@@ -657,7 +657,7 @@ export default function MarketPage() {
           <div className="flex items-start justify-between flex-wrap gap-2 mb-1">
             <div>
               <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <MapPin size={18} className="text-blue-400" />
+                <MapPin size={18} className="text-orange-500" />
                 Top Manufacturer by State
               </h2>
               <p className="text-slate-600 text-sm mt-1">
@@ -706,7 +706,7 @@ export default function MarketPage() {
           </div>
           <p className="text-slate-600 text-sm mb-6">
             Average listing price by calendar month ·&nbsp;
-            <span className="text-blue-400">Blue</span> = cheapest &nbsp;·&nbsp;
+            <span className="text-orange-500">Blue</span> = cheapest &nbsp;·&nbsp;
             <span className="text-red-400">Red</span> = most expensive
           </p>
 

@@ -18,14 +18,14 @@ const FEATURES = [
   {
     Icon: MessageSquare,
     color: '#6366f1',
-    bg: 'bg-indigo-500/10 border-indigo-500/20',
+    bg: 'bg-amber-500/10 border-amber-500/20',
     title: 'Negotiation Talking Points',
     desc: 'AI-generated, vehicle-specific arguments: comparable listings, days on market, seasonal trends, and known depreciation factors.',
   },
   {
     Icon: Sparkles,
     color: '#3b82f6',
-    bg: 'bg-blue-500/10 border-blue-500/20',
+    bg: 'bg-orange-500/10 border-orange-500/20',
     title: 'Counter-Offer Simulator',
     desc: 'Run through likely dealer responses and practice your counter strategy before stepping into the dealership.',
   },
@@ -50,8 +50,8 @@ export default function NegotiationHelperPage() {
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
-              <Handshake size={24} className="text-blue-400" />
+            <div className="w-12 h-12 rounded-xl bg-orange-600/20 border border-orange-500/30 flex items-center justify-center">
+              <Handshake size={24} className="text-orange-500" />
             </div>
             <h1 className="text-4xl font-bold text-slate-900">Negotiation Helper</h1>
           </div>
@@ -68,7 +68,7 @@ export default function NegotiationHelperPage() {
           {STEPS.map(({ step, label }, i) => (
             <div key={step} className="flex items-center gap-3">
               <div className="flex items-center gap-2.5">
-                <span className="w-7 h-7 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-bold flex-shrink-0">
+                <span className="w-7 h-7 rounded-full bg-orange-600/20 border border-orange-500/30 flex items-center justify-center text-orange-500 text-xs font-bold flex-shrink-0">
                   {step}
                 </span>
                 <span className="text-slate-600 text-sm font-medium whitespace-nowrap">{label}</span>
@@ -108,7 +108,7 @@ export default function NegotiationHelperPage() {
           </p>
           <p className="text-slate-500 text-xs">
             In the meantime, use the{' '}
-            <a href="/" className="text-blue-400 hover:underline">
+            <a href="/" className="text-orange-500 hover:underline">
               Analyze
             </a>{' '}
             tab to get price predictions and buy/wait recommendations.

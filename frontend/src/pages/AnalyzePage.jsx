@@ -488,7 +488,7 @@ function AgentReasoningLog({ agentLog }) {
         const isLast   = idx === agentLog.length - 1
         const isOrch   = entry.agent === 'OrchestratorAgent'
         const statusColor = entry.status === 'ok'
-          ? 'bg-blue-500/20 text-blue-400'
+          ? 'bg-orange-500/20 text-orange-500'
           : entry.status === 'fallback'
             ? 'bg-amber-500/20 text-amber-400'
             : 'bg-red-500/20 text-red-400'
@@ -557,7 +557,7 @@ function ScenarioPanel({ basePct, projectedPrice }) {
             onClick={() => setActive(active === s.key ? null : s.key)}
             className={`text-left p-3 rounded-xl border text-xs transition-all ${
               active === s.key
-                ? 'bg-blue-500/15 border-blue-500/40 text-blue-300'
+                ? 'bg-orange-500/10 border-orange-500/40 text-blue-300'
                 : 'bg-[#F5F0E8]/60 border-slate-200 text-slate-600 hover:border-slate-300'
             }`}>
             <div className="font-semibold mb-0.5">{s.label}</div>
@@ -734,12 +734,12 @@ export default function AnalyzePage() {
       {/* ── Hero / Form ── */}
       <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-10">
-          <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
+          <div className="flex items-center gap-2 text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">
             <Sparkles size={12} />
             8-Agent Pipeline · XGBoost · Prophet · GPT-4o-mini · Principled AI
           </div>
           <h1 className="text-4xl font-extrabold text-slate-900 mb-1">
-            AI Car Price <span className="text-blue-400">Intelligence</span>
+            AI Car Price <span className="text-orange-500">Intelligence</span>
           </h1>
           <p className="text-slate-600 text-base mb-8 max-w-2xl">
             Multi-agent decision intelligence — transparent BUY / WAIT / MONITOR signals
@@ -749,27 +749,27 @@ export default function AnalyzePage() {
           {/* Form card */}
           <div className="bg-white/80 border border-slate-200 rounded-2xl p-6 backdrop-blur-sm">
             <h2 className="text-slate-900 font-semibold mb-4 flex items-center gap-2 text-sm">
-              <Car size={16} className="text-blue-400" />
+              <Car size={16} className="text-orange-500" />
               Configure Your Search
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
                 { label: 'Make',  node: (
-                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none"
                     value={form.make} onChange={e => { set('make', e.target.value); set('model', ''); set('year', '') }}>
                     <option value="">Select make</option>
                     {makes.map(m => <option key={m} value={m}>{m}</option>)}
                   </select>
                 )},
                 { label: 'Model', node: (
-                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none disabled:opacity-40"
                     value={form.model} onChange={e => { set('model', e.target.value); set('year', '') }} disabled={!form.make}>
                     <option value="">Select model</option>
                     {models.map(m => <option key={m} value={m}>{m}</option>)}
                   </select>
                 )},
                 { label: 'Year', node: (
-                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none disabled:opacity-40"
                     value={form.year} onChange={e => set('year', e.target.value)} disabled={!form.model}>
                     <option value="">Year</option>
                     {years.map(y => <option key={y} value={y}>{y}</option>)}
@@ -777,17 +777,17 @@ export default function AnalyzePage() {
                 )},
                 { label: 'Mileage', node: (
                   <input type="number" min={0} max={300000} step={5000}
-                    className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none"
                     value={form.mileage} onChange={e => set('mileage', +e.target.value)} />
                 )},
                 { label: 'Condition', node: (
-                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none"
                     value={form.condition} onChange={e => set('condition', e.target.value)}>
                     {CONDITIONS.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 )},
                 { label: 'Region', node: (
-                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-orange-500 outline-none"
                     value={form.region} onChange={e => set('region', e.target.value)}>
                     {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
@@ -808,7 +808,7 @@ export default function AnalyzePage() {
                 className={`flex items-center gap-2 px-7 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                   loading || !form.make || !form.model || !form.year
                     ? 'bg-slate-100 text-slate-500 cursor-not-allowed'
-                    : 'bg-blue-600 hover:bg-blue-500 text-slate-900 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40'
+                    : 'bg-orange-700 hover:bg-orange-600 text-slate-900 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40'
                 }`}
               >
                 {loading
@@ -983,12 +983,12 @@ export default function AnalyzePage() {
                       forecastMethod === 'llm_blended'
                         ? 'bg-purple-500/15 text-purple-400 border-purple-500/20'
                         : forecastMethod === 'prophet'
-                          ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/20'
+                          ? 'bg-amber-500/15 text-amber-600 border-amber-500/20'
                           : forecastMethod === 'linear'
                             ? 'bg-amber-500/15 text-amber-400 border-amber-500/20'
                             : forecastMethod === 'industry_default'
                               ? 'bg-slate-500/15 text-slate-600 border-slate-500/20'
-                              : 'bg-blue-500/15 text-blue-400 border-blue-500/20'
+                              : 'bg-orange-500/10 text-orange-500 border-orange-500/20'
                     }`}>
                       {forecastMethod === 'llm_blended'      ? '✦ AI-Enhanced' :
                        forecastMethod === 'prophet'           ? 'Prophet Model' :
@@ -1059,7 +1059,7 @@ export default function AnalyzePage() {
               {/* AI Reasoning */}
               <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
-                  <Sparkles size={17} className="text-blue-400" />
+                  <Sparkles size={17} className="text-orange-500" />
                   <h3 className="text-slate-900 font-semibold">AI Analyst Reasoning</h3>
                 </div>
 
@@ -1068,13 +1068,13 @@ export default function AnalyzePage() {
                   <div className="space-y-2.5 flex-1">
                     {reasoning.map((bullet, i) => (
                       <div key={i} className="flex gap-2.5">
-                        <ChevronRight size={14} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                        <ChevronRight size={14} className="text-orange-500 mt-0.5 flex-shrink-0" />
                         <p className="text-slate-600 text-sm leading-relaxed">{bullet}</p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-[#F5F0E8]/60 border-l-2 border-blue-500 pl-4 py-3 rounded-r-lg mb-3 flex-1">
+                  <div className="bg-[#F5F0E8]/60 border-l-2 border-orange-500 pl-4 py-3 rounded-r-lg mb-3 flex-1">
                     <p className="text-slate-600 text-sm leading-relaxed italic">{result.explanation}</p>
                   </div>
                 )}
@@ -1150,9 +1150,9 @@ export default function AnalyzePage() {
               {/* Agent Reasoning Log */}
               <div className="bg-white border border-slate-200 rounded-2xl p-6">
                 <h3 className="text-slate-900 font-semibold mb-5 flex items-center gap-2">
-                  <Cpu size={16} className="text-blue-400" />
+                  <Cpu size={16} className="text-orange-500" />
                   Agent Reasoning Log
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20 font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-500 border border-orange-500/20 font-semibold">
                     {agentLog ? agentLog.length : '—'} agents
                   </span>
                 </h3>
@@ -1177,7 +1177,7 @@ export default function AnalyzePage() {
                 {transpNote && (
                   <div className="bg-white border border-slate-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 mb-2">
-                      <Eye size={14} className="text-blue-400" />
+                      <Eye size={14} className="text-orange-500" />
                       <h4 className="text-slate-900 font-semibold text-sm">Transparency Note</h4>
                     </div>
                     <p className="text-slate-600 text-xs leading-relaxed">{transpNote}</p>

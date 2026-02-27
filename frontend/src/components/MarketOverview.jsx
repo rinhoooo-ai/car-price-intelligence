@@ -65,7 +65,7 @@ export default function MarketOverview() {
   const seasonMin = Math.min(...(data.seasonality_data?.map(s => s.avg_price) ?? [0]))
   const seasonMax = Math.max(...(data.seasonality_data?.map(s => s.avg_price) ?? [1]))
   const heatScore = Math.min(100, Math.max(0, Math.round(50 + (data.mom_change_pct ?? 0) * 5)))
-  const heatColor = heatScore > 65 ? 'text-red-500' : heatScore < 35 ? 'text-blue-500' : 'text-amber-500'
+  const heatColor = heatScore > 65 ? 'text-red-500' : heatScore < 35 ? 'text-orange-600' : 'text-amber-500'
 
   return (
     <div className="space-y-6">
@@ -83,7 +83,7 @@ export default function MarketOverview() {
           <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Market Heat Score</p>
           <p className={`text-3xl font-bold mt-1 ${heatColor}`}>{heatScore}<span className="text-lg">/100</span></p>
           <div className="mt-2 bg-slate-100 rounded-full h-2">
-            <div className={`h-2 rounded-full transition-all ${heatScore > 65 ? 'bg-red-500' : heatScore < 35 ? 'bg-blue-500' : 'bg-amber-500'}`}
+            <div className={`h-2 rounded-full transition-all ${heatScore > 65 ? 'bg-red-500' : heatScore < 35 ? 'bg-orange-600' : 'bg-amber-500'}`}
               style={{ width: `${heatScore}%` }} />
           </div>
           <p className="text-xs text-slate-600 mt-1">
@@ -116,7 +116,7 @@ export default function MarketOverview() {
             <tbody className="divide-y divide-slate-100">
               {data.top_buys.map((row, i) => (
                 <tr key={i} onClick={() => handleRowClick(row)}
-                  className="hover:bg-indigo-50 cursor-pointer transition-colors">
+                  className="hover:bg-orange-50 cursor-pointer transition-colors">
                   <td className="px-4 py-3 font-medium text-slate-800 capitalize">{row.make}</td>
                   <td className="px-4 py-3 text-slate-600 capitalize">{row.model}</td>
                   <td className="px-4 py-3 text-slate-600">{row.year}</td>

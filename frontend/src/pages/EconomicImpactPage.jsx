@@ -85,7 +85,7 @@ export default function EconomicImpactPage() {
             Economic <span className="text-amber-400">Impact</span>
           </h1>
           <p className="text-slate-600 text-base max-w-2xl">
-            CarIntel reduces information asymmetry in the $841 billion US used car market —
+            Vroomly reduces information asymmetry in the $841 billion US used car market —
             saving consumers money, improving market efficiency, and accelerating the EV transition.
           </p>
 
@@ -93,8 +93,8 @@ export default function EconomicImpactPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {[
               { label: 'Avg buyer overpay (without AI)', value: '$1,900', sub: 'per transaction', color: 'text-red-400', icon: ArrowUp },
-              { label: 'Avg savings with CarIntel',      value: '$1,410', sub: 'per transaction', color: 'text-emerald-400', icon: ArrowDown },
-              { label: 'US used car market size',        value: '$841B',  sub: 'annual market', color: 'text-blue-400',    icon: BarChart2 },
+              { label: 'Avg savings with Vroomly',      value: '$1,410', sub: 'per transaction', color: 'text-emerald-400', icon: ArrowDown },
+              { label: 'US used car market size',        value: '$841B',  sub: 'annual market', color: 'text-orange-500',    icon: BarChart2 },
               { label: 'Price efficiency improvement',   value: '+16%',   sub: 'vs no-AI baseline', color: 'text-purple-400', icon: TrendingUp },
             ].map(({ label, value, sub, color, icon: Icon }) => (
               <div key={label} className="bg-white/80 border border-slate-200 rounded-2xl p-4">
@@ -176,7 +176,7 @@ export default function EconomicImpactPage() {
                     <p className="text-slate-600 text-[10px]">avg overpay</p>
                   </div>
                   <div className="border-t border-slate-200 pt-2">
-                    <p className="text-emerald-400 text-xs">With CarIntel</p>
+                    <p className="text-emerald-400 text-xs">With Vroomly</p>
                     <p className="text-emerald-400 font-bold">${row.with_ai.toLocaleString()}</p>
                     <p className="text-slate-600 text-[10px]">avg overpay</p>
                   </div>
@@ -251,7 +251,7 @@ export default function EconomicImpactPage() {
             </ResponsiveContainer>
             <div className="flex gap-4 mt-2">
               <div className="flex items-center gap-1.5"><div className="w-3 h-0.5 bg-purple-500" /><span className="text-xs text-slate-500">EV avg price</span></div>
-              <div className="flex items-center gap-1.5"><div className="w-3 h-0.5 bg-blue-500" /><span className="text-xs text-slate-500">ICE avg price</span></div>
+              <div className="flex items-center gap-1.5"><div className="w-3 h-0.5 bg-orange-600" /><span className="text-xs text-slate-500">ICE avg price</span></div>
             </div>
           </div>
         </div>
@@ -283,7 +283,7 @@ export default function EconomicImpactPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { label: 'Annual Consumer Savings', value: `$${MULTIPLIER_SCENARIOS[scaleTier].annual_savings}`, color: 'text-emerald-400', desc: 'Direct buyer savings from better price discovery' },
-              { label: 'GDP Efficiency Effect', value: `$${MULTIPLIER_SCENARIOS[scaleTier].gdp_effect}`, color: 'text-blue-400', desc: 'Multiplier effect from reduced transaction friction (3x)' },
+              { label: 'GDP Efficiency Effect', value: `$${MULTIPLIER_SCENARIOS[scaleTier].gdp_effect}`, color: 'text-orange-500', desc: 'Multiplier effect from reduced transaction friction (3x)' },
               { label: 'Market Segments Impacted', value: '6', color: 'text-purple-400', desc: 'Sedans, SUVs, Trucks, EVs, Compact, Luxury' },
             ].map(m => (
               <div key={m.label} className="bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4">

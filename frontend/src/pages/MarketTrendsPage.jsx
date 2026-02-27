@@ -119,12 +119,12 @@ export default function MarketTrendsPage() {
       {/* ── Hero ── */}
       <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-10">
-          <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
+          <div className="flex items-center gap-2 text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">
             <BarChart2 size={12} />
             Market Intelligence · 2020 – 2024 Analysis
           </div>
           <h1 className="text-4xl font-extrabold text-slate-900 mb-1">
-            Market <span className="text-blue-400">Trends</span>
+            Market <span className="text-orange-500">Trends</span>
           </h1>
           <p className="text-slate-600 text-base max-w-2xl">
             US used car market dynamics from COVID disruption through normalization.
@@ -134,7 +134,7 @@ export default function MarketTrendsPage() {
           {/* Hero metrics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
             {[
-              { label: 'Avg Used Car Price (2024)', value: '$19,644', sub: '↓ 30% from 2021 peak', color: 'text-blue-400' },
+              { label: 'Avg Used Car Price (2024)', value: '$19,644', sub: '↓ 30% from 2021 peak', color: 'text-orange-500' },
               { label: 'MoM Change (Dec 24)',        value: '-0.8%',   sub: 'Softening demand',    color: 'text-red-400'   },
               { label: 'Total Active Listings',      value: '4.2M',   sub: 'Nationwide inventory', color: 'text-emerald-400' },
               { label: 'Used vs New Spread',         value: '$25.4k', sub: 'New avg: $45,000',     color: 'text-purple-400' },
@@ -167,7 +167,7 @@ export default function MarketTrendsPage() {
                 <button key={opt.key} onClick={() => setChartView(opt.key)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     chartView === opt.key
-                      ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                      ? 'bg-orange-500/20 text-orange-500 border border-orange-500/30'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-600'
                   }`}>
                   {opt.label}
@@ -250,7 +250,7 @@ export default function MarketTrendsPage() {
         {/* ── Regional Market Heat ── */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-2">
-            <Globe size={18} className="text-blue-400" />
+            <Globe size={18} className="text-orange-500" />
             <h2 className="text-slate-900 font-bold text-lg">Regional Price Heat Map (Dec 2024)</h2>
           </div>
           <p className="text-slate-600 text-sm mb-5">

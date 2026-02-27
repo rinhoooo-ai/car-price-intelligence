@@ -12,14 +12,14 @@ const HITL_STEPS = [
     title: 'AI Generates Recommendation',
     desc: '7-agent pipeline runs XGBoost + Prophet + GPT-4o-mini to produce a BUY NOW / WAIT / MONITOR signal with confidence score, risk assessment, and reasoning.',
     badge: 'Automated',
-    badgeColor: 'bg-indigo-500/15 text-indigo-400',
+    badgeColor: 'bg-amber-500/15 text-amber-600',
   },
   {
     id: 2, Icon: Eye, color: '#3b82f6',
     title: 'Transparency Layer',
     desc: 'Every recommendation includes confidence %, volatility level, uncertainty range, forecast method label, and 3-bullet reasoning — so humans can evaluate the evidence.',
     badge: 'Transparent',
-    badgeColor: 'bg-blue-500/15 text-blue-400',
+    badgeColor: 'bg-orange-500/10 text-orange-500',
   },
   {
     id: 3, Icon: User, color: '#f59e0b',
@@ -146,7 +146,7 @@ export default function PrincipledAIPage() {
             Responsible <span className="text-emerald-400">AI Design</span>
           </h1>
           <p className="text-slate-600 text-base max-w-2xl">
-            CarIntel is built on four pillars of responsible AI: Transparency, Accountability, Fairness, and Privacy.
+            Vroomly is built on four pillars of responsible AI: Transparency, Accountability, Fairness, and Privacy.
             Humans remain in the decision loop — AI provides evidence, not commands.
           </p>
 
@@ -154,7 +154,7 @@ export default function PrincipledAIPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {[
               { label: 'Protected Attributes Used', value: '0', color: 'text-emerald-400', icon: Shield },
-              { label: 'Confidence Score Displayed', value: '100%', color: 'text-blue-400', icon: Eye },
+              { label: 'Confidence Score Displayed', value: '100%', color: 'text-orange-500', icon: Eye },
               { label: 'Audit Trail Steps', value: '9', color: 'text-purple-400', icon: FileText },
               { label: 'Advisory Only', value: '✓', color: 'text-amber-400', icon: Scale },
             ].map(({ label, value, color, icon: Icon }) => (
@@ -188,7 +188,7 @@ export default function PrincipledAIPage() {
                 onClick={() => setActiveStep(step.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition-all duration-300 ${
                   activeStep === step.id
-                    ? 'bg-slate-100 border-blue-500/50 text-slate-900 shadow-lg'
+                    ? 'bg-slate-100 border-orange-500/50 text-slate-900 shadow-lg'
                     : 'bg-[#F5F0E8]/60 border-slate-200 text-slate-500 hover:border-slate-300'
                 }`}>
                 <div className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold"
@@ -256,7 +256,7 @@ export default function PrincipledAIPage() {
             <h2 className="text-xl font-bold text-slate-900">Interactive: Review an AI Decision</h2>
           </div>
           <p className="text-slate-600 text-sm mb-6">
-            This is how CarIntel presents AI analysis for human review.
+            This is how Vroomly presents AI analysis for human review.
             The human has full context before deciding.
           </p>
 
@@ -265,9 +265,9 @@ export default function PrincipledAIPage() {
             {/* AI Output */}
             <div className="lg:col-span-2 bg-[#F5F0E8]/60 border border-slate-200 rounded-2xl p-5">
               <div className="flex items-center gap-2 mb-4">
-                <Bot size={16} className="text-indigo-400" />
-                <span className="text-sm font-semibold text-indigo-400">AI Agent Output</span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-400 border border-indigo-500/20">Advisory Only</span>
+                <Bot size={16} className="text-amber-600" />
+                <span className="text-sm font-semibold text-amber-600">AI Agent Output</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-600 border border-amber-500/20">Advisory Only</span>
               </div>
 
               <div className="flex items-start justify-between mb-4">
@@ -282,7 +282,7 @@ export default function PrincipledAIPage() {
 
               <div className="grid grid-cols-3 gap-3 mb-4">
                 {[
-                  { label: 'Confidence', value: `${DEMO_RESULT.confidence}%`, color: 'text-blue-400' },
+                  { label: 'Confidence', value: `${DEMO_RESULT.confidence}%`, color: 'text-orange-500' },
                   { label: '90-Day Change', value: DEMO_RESULT.change, color: 'text-emerald-400' },
                   { label: 'Risk Score', value: DEMO_RESULT.risk + '/100', color: 'text-emerald-400' },
                 ].map(m => (
@@ -296,7 +296,7 @@ export default function PrincipledAIPage() {
               <div className="space-y-2 mb-4">
                 {DEMO_RESULT.reasoning.map((r, i) => (
                   <div key={i} className="flex gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 flex-shrink-0" />
                     <p className="text-slate-600 text-sm">{r}</p>
                   </div>
                 ))}
@@ -405,7 +405,7 @@ export default function PrincipledAIPage() {
             <h2 className="text-xl font-bold text-slate-900">Fairness: Feature Audit</h2>
           </div>
           <p className="text-slate-600 text-sm mb-5">
-            CarIntel makes no decisions based on who you are — only on market data about the vehicle.
+            Vroomly makes no decisions based on who you are — only on market data about the vehicle.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -439,7 +439,7 @@ export default function PrincipledAIPage() {
           <Shield size={24} className="text-emerald-400 mx-auto mb-3" />
           <h3 className="text-slate-900 font-bold text-lg mb-2">AI Recommendations Are Advisory Only</h3>
           <p className="text-slate-600 text-sm max-w-2xl mx-auto">
-            CarIntel provides data-driven price intelligence for informational purposes only.
+            Vroomly provides data-driven price intelligence for informational purposes only.
             Recommendations are generated by machine learning models and AI analysis — not human financial advice.
             Always verify with a licensed dealer or independent inspection before purchasing any vehicle.
           </p>

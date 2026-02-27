@@ -186,12 +186,12 @@ export default function DecisionReportPage() {
       {/* ── Hero / Vehicle selector ── */}
       <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80 no-print">
         <div className="max-w-7xl mx-auto px-6 py-10">
-          <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
+          <div className="flex items-center gap-2 text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">
             <BarChart2 size={12} />
             AI Decision Report · Full Intelligence Brief
           </div>
           <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
-            AI Decision <span className="text-blue-400">Report</span>
+            AI Decision <span className="text-orange-500">Report</span>
           </h1>
           <p className="text-slate-600 text-sm mb-6 max-w-2xl">
             Select a vehicle to generate a full AI intelligence brief. Download as PDF for offline review.
@@ -202,7 +202,7 @@ export default function DecisionReportPage() {
               <button key={v.id} onClick={() => setSelectedId(v.id)}
                 className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                   selectedId === v.id
-                    ? 'bg-blue-500/20 border-blue-500/40 text-blue-300'
+                    ? 'bg-orange-500/20 border-orange-500/40 text-blue-300'
                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}>
                 {v.label}
@@ -213,7 +213,7 @@ export default function DecisionReportPage() {
 
           <div className="flex gap-3">
             <button onClick={handlePrint}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-slate-900 font-semibold text-sm transition-all shadow-lg shadow-blue-500/20">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-700 hover:bg-orange-600 text-slate-900 font-semibold text-sm transition-all shadow-lg shadow-orange-500/20">
               <Download size={15} />
               Download PDF Report
             </button>
@@ -232,7 +232,7 @@ export default function DecisionReportPage() {
         {/* Report header */}
         <div className="flex items-center justify-between flex-wrap gap-4 pb-4 border-b border-slate-200">
           <div>
-            <p className="text-slate-500 text-xs uppercase tracking-widest">CarIntel AI Decision Report</p>
+            <p className="text-slate-500 text-xs uppercase tracking-widest">Vroomly AI Decision Report</p>
             <h2 className="text-2xl font-black text-slate-900 mt-0.5">{label}</h2>
             <p className="text-slate-500 text-xs mt-1">Generated: {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
@@ -250,7 +250,7 @@ export default function DecisionReportPage() {
               { label: 'Current Fair Value',    value: `$${current_price.toLocaleString()}`,    color: 'text-slate-900' },
               { label: '90-Day Forecast',       value: `$${projected_price.toLocaleString()}`,  color: change >= 0 ? 'text-emerald-400' : 'text-red-400' },
               { label: 'Projected Change',      value: `${change > 0 ? '+' : ''}${change}%`,   color: change >= 0 ? 'text-emerald-400' : 'text-red-400' },
-              { label: 'Confidence Score',      value: `${confidence}%`, color: 'text-blue-400' },
+              { label: 'Confidence Score',      value: `${confidence}%`, color: 'text-orange-500' },
               { label: 'Volatility',            value: volatility,       color: volColor ? '' : '' },
               { label: 'Risk Score',            value: `${risk}/100`,    color: risk < 40 ? 'text-emerald-400' : risk < 65 ? 'text-amber-400' : 'text-red-400' },
               { label: 'Uncertainty Low',       value: `$${unc_low.toLocaleString()}`,          color: 'text-slate-600' },
@@ -283,14 +283,14 @@ export default function DecisionReportPage() {
           {/* AI Reasoning */}
           <div className="bg-white border border-slate-200 rounded-2xl p-6">
             <h3 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
-              <Bot size={16} className="text-blue-400" />
+              <Bot size={16} className="text-orange-500" />
               AI Analyst Reasoning
             </h3>
             <div className="space-y-3">
               {reasoning.map((r, i) => (
                 <div key={i} className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-blue-400 text-xs font-bold">{i + 1}</span>
+                  <div className="w-6 h-6 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-orange-500 text-xs font-bold">{i + 1}</span>
                   </div>
                   <p className="text-slate-600 text-sm leading-relaxed">{r}</p>
                 </div>
@@ -340,9 +340,9 @@ export default function DecisionReportPage() {
         {/* Agent Reasoning Log */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <h3 className="text-slate-900 font-semibold mb-5 flex items-center gap-2">
-            <Cpu size={16} className="text-blue-400" />
+            <Cpu size={16} className="text-orange-500" />
             Agent Reasoning Chain
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20 font-semibold">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-500 border border-orange-500/20 font-semibold">
               {agent_log.length} agents
             </span>
           </h3>
@@ -350,7 +350,7 @@ export default function DecisionReportPage() {
             {agent_log.map((entry, idx) => {
               const IconComp = AGENT_ICONS[entry.agent] || Activity
               const isLast   = idx === agent_log.length - 1
-              const scColor  = entry.status === 'ok' ? 'bg-blue-500/20 text-blue-400' : 'bg-amber-500/20 text-amber-400'
+              const scColor  = entry.status === 'ok' ? 'bg-orange-500/20 text-orange-500' : 'bg-amber-500/20 text-amber-400'
               return (
                 <div key={idx} className="flex gap-3">
                   <div className="flex flex-col items-center flex-shrink-0">
@@ -378,7 +378,7 @@ export default function DecisionReportPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white border border-slate-200 rounded-2xl p-5">
             <div className="flex items-center gap-2 mb-2">
-              <Eye size={14} className="text-blue-400" />
+              <Eye size={14} className="text-orange-500" />
               <h4 className="text-slate-900 font-semibold text-sm">Transparency Note</h4>
             </div>
             <p className="text-slate-600 text-xs leading-relaxed">{transparency}</p>
@@ -397,7 +397,7 @@ export default function DecisionReportPage() {
           <Shield size={18} className="text-emerald-400 mx-auto mb-2" />
           <p className="text-slate-500 text-xs max-w-2xl mx-auto">
             <span className="text-slate-600 font-semibold">Advisory Only: </span>
-            CarIntel provides data-driven price intelligence for informational purposes only.
+            Vroomly provides data-driven price intelligence for informational purposes only.
             This report is generated by AI models — not human financial advice.
             Always verify with a licensed dealer or independent inspection before purchasing.
           </p>

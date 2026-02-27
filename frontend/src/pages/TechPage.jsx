@@ -66,12 +66,12 @@ export default function TechPage() {
       {/* ── Hero ── */}
       <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
+          <div className="flex items-center gap-2 text-orange-500 text-xs font-semibold uppercase tracking-widest mb-3">
             <Layers size={12} />
             Principled AI · Multi-Agent Architecture
           </div>
           <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
-            System <span className="text-blue-400">Architecture</span>
+            System <span className="text-orange-500">Architecture</span>
           </h1>
           <p className="text-slate-600 text-base max-w-2xl">
             A modular 7-agent decision intelligence pipeline. Deterministic Python orchestration
@@ -86,9 +86,9 @@ export default function TechPage() {
         {/* ── Microservice Flow Diagram ── */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-1">
-            <Layers size={18} className="text-blue-400" />
+            <Layers size={18} className="text-orange-500" />
             <h2 className="text-xl font-bold text-slate-900">Microservice Architecture</h2>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20 font-semibold ml-1">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-500 border border-orange-500/20 font-semibold ml-1">
               Animated
             </span>
             <span className="text-xs px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-400 border border-violet-500/20 font-semibold">
@@ -108,7 +108,7 @@ export default function TechPage() {
         {/* ── Decision Rules ── */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-2">
-            <Scale size={18} className="text-blue-400" />
+            <Scale size={18} className="text-orange-500" />
             <h2 className="text-xl font-bold text-slate-900">Decision Rules</h2>
             <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-semibold ml-1">
               Deterministic · Auditable
@@ -141,13 +141,13 @@ export default function TechPage() {
 
           <div className="bg-white border border-slate-200 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-1">
-              <BarChart2 size={18} className="text-blue-400" />
+              <BarChart2 size={18} className="text-orange-500" />
               <h2 className="text-xl font-bold text-slate-900">What Drives Car Prices?</h2>
             </div>
             <p className="text-slate-600 text-sm mb-4">
               Global SHAP importance from 500 held-out test listings.&nbsp;
               <span className="text-emerald-400">Green</span> = increases price ·&nbsp;
-              <span className="text-blue-400">Blue</span> = decreases price
+              <span className="text-orange-500">Blue</span> = decreases price
             </p>
 
             <ResponsiveContainer width="100%" height={280}>
@@ -170,7 +170,7 @@ export default function TechPage() {
 
           <div className="bg-white border border-slate-200 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Cpu size={18} className="text-blue-400" />
+              <Cpu size={18} className="text-orange-500" />
               <h2 className="text-xl font-bold text-slate-900">Model Card</h2>
             </div>
 
@@ -215,7 +215,7 @@ export default function TechPage() {
         {/* ── Data Sources ── */}
         <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-4">
-            <BookOpen size={18} className="text-blue-400" />
+            <BookOpen size={18} className="text-orange-500" />
             <h2 className="text-xl font-bold text-slate-900">Data Sources &amp; Stack</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
