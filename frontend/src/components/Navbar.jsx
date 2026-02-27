@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router-dom'
-import { Car, BarChart3, Cpu, TrendingUp, Shield, Globe, FileText, BarChart2 } from 'lucide-react'
+import { Car, BarChart3, Cpu, TrendingUp, Shield, Globe, FileText, BarChart2, Handshake } from 'lucide-react'
 
 const links = [
-  { to: '/',        label: 'Analyze',      icon: TrendingUp, end: true  },
-  { to: '/market',  label: 'Market',       icon: BarChart3,  end: false },
-  { to: '/trends',  label: 'Trends',       icon: BarChart2,  end: false },
-  { to: '/ethics',  label: 'Ethical AI',   icon: Shield,     end: false },
-  { to: '/impact',  label: 'Impact',       icon: Globe,      end: false },
-  { to: '/report',  label: 'AI Report',    icon: FileText,   end: false },
-  { to: '/tech',    label: 'Architecture', icon: Cpu,        end: false },
+  { to: '/',           label: 'Analyze',      icon: TrendingUp, end: true  },
+  { to: '/market',     label: 'Market',       icon: BarChart3,  end: false },
+  { to: '/trends',     label: 'Trends',       icon: BarChart2,  end: false },
+  { to: '/negotiate',  label: 'Negotiate',    icon: Handshake,  end: false },
+  { to: '/ethics',     label: 'Ethical AI',   icon: Shield,     end: false },
+  { to: '/impact',     label: 'Impact',       icon: Globe,      end: false },
+  { to: '/report',     label: 'AI Report',    icon: FileText,   end: false },
+  { to: '/tech',       label: 'Architecture', icon: Cpu,        end: false },
 ]
 
 export default function Navbar() {

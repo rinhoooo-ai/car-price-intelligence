@@ -6,7 +6,8 @@ import TechPage            from './pages/TechPage'
 import MarketTrendsPage    from './pages/MarketTrendsPage'
 import PrincipledAIPage    from './pages/PrincipledAIPage'
 import EconomicImpactPage  from './pages/EconomicImpactPage'
-import DecisionReportPage  from './pages/DecisionReportPage'
+import DecisionReportPage      from './pages/DecisionReportPage'
+import NegotiationHelperPage  from './pages/NegotiationHelperPage'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/impact"  element={<EconomicImpactPage />} />
             <Route path="/report"  element={<DecisionReportPage />} />
             <Route path="/tech"    element={<TechPage />}           />
+            <Route path="/negotiate" element={<NegotiationHelperPage />} />
           </Routes>
         </main>
       </div>
