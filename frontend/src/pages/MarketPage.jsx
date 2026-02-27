@@ -76,9 +76,9 @@ function ForecastBadge({ method }) {
     prophet:          { label: 'Prophet',      cls: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/20' },
     linear:           { label: 'Extrapolated', cls: 'bg-amber-500/15  text-amber-400  border-amber-500/20'  },
     market_avg:       { label: 'Market Avg',   cls: 'bg-cyan-500/15   text-cyan-400   border-cyan-500/20'   },
-    industry_default: { label: 'Industry Est', cls: 'bg-slate-500/15  text-slate-400  border-slate-500/20'  },
+    industry_default: { label: 'Industry Est', cls: 'bg-slate-500/15  text-slate-600  border-slate-500/20'  },
   }
-  const { label, cls } = cfg[method] || { label: method, cls: 'bg-slate-500/15 text-slate-400 border-slate-500/20' }
+  const { label, cls } = cfg[method] || { label: method, cls: 'bg-slate-500/15 text-slate-600 border-slate-500/20' }
   return (
     <span className={`text-[10px] px-1.5 py-0.5 rounded border font-medium ${cls}`}>{label}</span>
   )
@@ -151,23 +151,23 @@ function USManufacturerMap({ onStateSelect, selectedState }) {
       {/* Floating tooltip */}
       {tooltip.visible && ttData && (
         <div
-          className="fixed z-50 pointer-events-none bg-slate-900 border border-slate-600 rounded-xl shadow-2xl p-3 text-xs min-w-44"
+          className="fixed z-50 pointer-events-none bg-[#F5F0E8] border border-slate-300 rounded-xl shadow-2xl p-3 text-xs min-w-44"
           style={{ left: tooltip.x + 14, top: tooltip.y - 10, transform: 'translateY(-100%)' }}
         >
-          <p className="font-bold text-white text-sm mb-1">{ttData.name}</p>
-          <p className="text-slate-400 mb-2">
+          <p className="font-bold text-slate-900 text-sm mb-1">{ttData.name}</p>
+          <p className="text-slate-600 mb-2">
             Avg price: <span className="text-blue-400 font-semibold">${ttData.avg_price.toLocaleString()}</span>
             <span className="text-slate-600 ml-2">·</span>
-            <span className="text-slate-400 ml-2">{ttData.total_listings.toLocaleString()} listings</span>
+            <span className="text-slate-600 ml-2">{ttData.total_listings.toLocaleString()} listings</span>
           </p>
           <p className="text-slate-500 text-[10px] uppercase font-semibold tracking-wide mb-1">Top Manufacturers</p>
           {ttData.top3.map((m, i) => (
             <div key={i} className="flex items-center gap-2 mb-0.5">
               <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: makeColor(m.make) }} />
-              <span className="capitalize text-slate-300 flex-1">{m.make}</span>
+              <span className="capitalize text-slate-600 flex-1">{m.make}</span>
               <span className="text-slate-500">{m.count.toLocaleString()}</span>
               <span className="text-slate-600">·</span>
-              <span className="text-slate-400">${m.avg_price.toLocaleString()}</span>
+              <span className="text-slate-600">${m.avg_price.toLocaleString()}</span>
             </div>
           ))}
           <p className="text-slate-600 text-[10px] mt-2">Click to explore in playground ↓</p>
@@ -179,7 +179,7 @@ function USManufacturerMap({ onStateSelect, selectedState }) {
         {TOP_MAKES.map(make => (
           <div key={make} className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded-sm flex-shrink-0" style={{ background: makeColor(make) }} />
-            <span className="text-xs text-slate-400 capitalize">{make}</span>
+            <span className="text-xs text-slate-600 capitalize">{make}</span>
           </div>
         ))}
       </div>
@@ -222,13 +222,13 @@ function StatePlayground({ initialState }) {
       {/* Controls */}
       <div className="flex gap-4 flex-wrap">
         <div className="flex-1 min-w-48">
-          <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-1.5">
+          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide block mb-1.5">
             <MapPin size={10} className="inline mr-1" />State
           </label>
           <select
             value={selState}
             onChange={e => { setSelState(e.target.value); setSelMake('') }}
-            className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none"
+            className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
           >
             <option value="">Select a state…</option>
             {sortedStates.map(([abbr, d]) => (
@@ -238,14 +238,14 @@ function StatePlayground({ initialState }) {
         </div>
 
         <div className="flex-1 min-w-44">
-          <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-1.5">
+          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide block mb-1.5">
             <BarChart2 size={10} className="inline mr-1" />Manufacturer (optional filter)
           </label>
           <select
             value={selMake}
             onChange={e => setSelMake(e.target.value)}
             disabled={!selState}
-            className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
+            className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
           >
             <option value="">All top 3</option>
             {makes.map(m => (
@@ -274,9 +274,9 @@ function StatePlayground({ initialState }) {
               { label: 'Total Listings', value: stateData.total_listings.toLocaleString(), sub: 'Active inventory' },
               { label: 'Top Manufacturer', value: stateData.top_make.charAt(0).toUpperCase() + stateData.top_make.slice(1), sub: 'Most listings' },
             ].map(({ label, value, sub }) => (
-              <div key={label} className="bg-slate-900/60 border border-slate-700/40 rounded-xl p-3 text-center">
+              <div key={label} className="bg-[#F5F0E8]/60 border border-slate-200/80 rounded-xl p-3 text-center">
                 <p className="text-[10px] text-slate-500 uppercase tracking-wide">{label}</p>
-                <p className="text-lg font-bold text-white mt-0.5">{value}</p>
+                <p className="text-lg font-bold text-slate-900 mt-0.5">{value}</p>
                 <p className="text-[10px] text-slate-600 mt-0.5">{sub}</p>
               </div>
             ))}
@@ -287,17 +287,17 @@ function StatePlayground({ initialState }) {
 
             {/* Average Price by Make */}
             <div>
-              <p className="text-sm font-semibold text-white mb-3">
+              <p className="text-sm font-semibold text-slate-900 mb-3">
                 Avg Price by Manufacturer
                 {filteredMake && (
-                  <span className="ml-2 text-xs text-slate-400">· highlighting {filteredMake.make}</span>
+                  <span className="ml-2 text-xs text-slate-600">· highlighting {filteredMake.make}</span>
                 )}
               </p>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={priceData} margin={{ left: 8, right: 8, top: 4 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#94a3b8' }} />
-                  <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} />
+                  <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#475569' }} />
                   <ReTooltip
                     contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', fontSize: 12 }}
                     labelStyle={{ color: '#e2e8f0' }}
@@ -317,12 +317,12 @@ function StatePlayground({ initialState }) {
 
             {/* Listing Count by Make */}
             <div>
-              <p className="text-sm font-semibold text-white mb-3">Listing Count by Manufacturer</p>
+              <p className="text-sm font-semibold text-slate-900 mb-3">Listing Count by Manufacturer</p>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={priceData} margin={{ left: 8, right: 8, top: 4 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#94a3b8' }} />
-                  <YAxis tick={{ fontSize: 10, fill: '#64748b' }} />
+                  <YAxis tick={{ fontSize: 10, fill: '#475569' }} />
                   <ReTooltip
                     contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', fontSize: 12 }}
                     labelStyle={{ color: '#e2e8f0' }}
@@ -351,17 +351,17 @@ function StatePlayground({ initialState }) {
               return (
                 <div key={m.make}
                   className={`rounded-xl border p-4 transition-all cursor-pointer
-                    ${selMake === m.make ? 'border-blue-500/50 bg-blue-500/8' : 'border-slate-700/40 bg-slate-900/40'}
+                    ${selMake === m.make ? 'border-blue-500/50 bg-blue-500/8' : 'border-slate-200/80 bg-[#F5F0E8]/40'}
                     ${isFiltered ? 'opacity-30' : ''}`}
                   onClick={() => setSelMake(selMake === m.make ? '' : m.make)}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: makeColor(m.make) }} />
-                    <span className="text-sm font-bold text-white capitalize">#{i+1} {m.make}</span>
+                    <span className="text-sm font-bold text-slate-900 capitalize">#{i+1} {m.make}</span>
                   </div>
-                  <p className="text-xl font-extrabold text-white">${m.avg_price.toLocaleString()}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">{m.count.toLocaleString()} listings · {pct}% of state</p>
-                  <div className="mt-2 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                  <p className="text-xl font-extrabold text-slate-900">${m.avg_price.toLocaleString()}</p>
+                  <p className="text-xs text-slate-600 mt-0.5">{m.count.toLocaleString()} listings · {pct}% of state</p>
+                  <div className="mt-2 h-1.5 bg-slate-100 rounded-full overflow-hidden">
                     <div className="h-1.5 rounded-full" style={{ width: `${pct}%`, background: makeColor(m.make) }} />
                   </div>
                 </div>
@@ -424,11 +424,11 @@ export default function MarketPage() {
 
   if (loading) return (
     <div className="pt-8 max-w-7xl mx-auto px-6 animate-pulse space-y-6">
-      <div className="h-52 bg-slate-800 rounded-2xl" />
+      <div className="h-52 bg-white rounded-2xl" />
       <div className="grid grid-cols-3 gap-4">
-        {[1, 2, 3].map(i => <div key={i} className="h-36 bg-slate-800 rounded-2xl" />)}
+        {[1, 2, 3].map(i => <div key={i} className="h-36 bg-white rounded-2xl" />)}
       </div>
-      <div className="h-64 bg-slate-800 rounded-2xl" />
+      <div className="h-64 bg-white rounded-2xl" />
     </div>
   )
 
@@ -462,12 +462,12 @@ export default function MarketPage() {
     <div className="min-h-screen">
 
       {/* ── Hero ── */}
-      <div className="bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700/50">
+      <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <h1 className="text-4xl font-extrabold text-white mb-2">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
             Market <span className="text-blue-400">Overview</span>
           </h1>
-          <p className="text-slate-400 text-base mb-8 max-w-2xl">
+          <p className="text-slate-600 text-base mb-8 max-w-2xl">
             Real-time car market signals · Craigslist listing snapshot · Updated {data.updated_at}
           </p>
 
@@ -475,8 +475,8 @@ export default function MarketPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
             {/* Avg Price */}
-            <div className="bg-slate-800/70 border border-slate-700 rounded-xl p-6">
-              <p className="text-slate-400 text-sm mb-1 flex items-center gap-1.5">
+            <div className="bg-white/80 border border-slate-200 rounded-xl p-6">
+              <p className="text-slate-600 text-sm mb-1 flex items-center gap-1.5">
                 <DollarSign size={13} /> Avg Market Price
                 {data.price_source === 'predictions' && (
                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-medium ml-1">
@@ -484,12 +484,12 @@ export default function MarketPage() {
                   </span>
                 )}
                 {data.price_source === 'industry' && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-600/40 text-slate-400 border border-slate-600/40 font-medium ml-1">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-600/40 text-slate-600 border border-slate-300/40 font-medium ml-1">
                     Baseline
                   </span>
                 )}
               </p>
-              <p className="text-4xl font-extrabold text-white">
+              <p className="text-4xl font-extrabold text-slate-900">
                 $<AnimatedCounter end={Math.round(data.avg_price_this_month || 0)} />
               </p>
               <p className={`text-sm font-semibold mt-1.5 flex items-center gap-1
@@ -500,14 +500,14 @@ export default function MarketPage() {
             </div>
 
             {/* Heat score */}
-            <div className="bg-slate-800/70 border border-slate-700 rounded-xl p-6">
-              <p className="text-slate-400 text-sm mb-1 flex items-center gap-1.5">
+            <div className="bg-white/80 border border-slate-200 rounded-xl p-6">
+              <p className="text-slate-600 text-sm mb-1 flex items-center gap-1.5">
                 <Thermometer size={13} /> Market Heat Score
               </p>
               <p className={`text-4xl font-extrabold ${heatColor}`}>
                 <AnimatedCounter end={heatScore} suffix="/100" />
               </p>
-              <div className="mt-2.5 h-2 bg-slate-700 rounded-full overflow-hidden">
+              <div className="mt-2.5 h-2 bg-slate-100 rounded-full overflow-hidden">
                 <div className={`h-2 rounded-full ${heatBarClr} transition-all duration-1000`}
                   style={{ width: `${heatScore}%` }} />
               </div>
@@ -515,8 +515,8 @@ export default function MarketPage() {
             </div>
 
             {/* Buy opportunities */}
-            <div className="bg-slate-800/70 border border-slate-700 rounded-xl p-6">
-              <p className="text-slate-400 text-sm mb-1 flex items-center gap-1.5">
+            <div className="bg-white/80 border border-slate-200 rounded-xl p-6">
+              <p className="text-slate-600 text-sm mb-1 flex items-center gap-1.5">
                 <Target size={13} /> Buy Opportunities
               </p>
               <p className="text-4xl font-extrabold text-emerald-400">
@@ -532,17 +532,17 @@ export default function MarketPage() {
       <div className="max-w-7xl mx-auto px-6 mt-8 space-y-8 pb-12">
 
         {/* ── Best Buys table ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
-          <div className="px-6 py-5 border-b border-slate-700/60 flex items-start justify-between gap-4 flex-wrap">
+        <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+          <div className="px-6 py-5 border-b border-slate-200/80 flex items-start justify-between gap-4 flex-wrap">
             <div>
-              <h2 className="text-xl font-bold text-white">Best Buy Opportunities</h2>
-              <p className="text-slate-400 text-sm mt-0.5">
+              <h2 className="text-xl font-bold text-slate-900">Best Buy Opportunities</h2>
+              <p className="text-slate-600 text-sm mt-0.5">
                 Click any row to run a full AI analysis · Sorted by lowest predicted price
               </p>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               {hasSeedData && (
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-700/50 px-3 py-1.5 rounded-lg">
+                <div className="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-100/60 px-3 py-1.5 rounded-lg">
                   <Database size={11} />
                   Includes pre-seeded data
                 </div>
@@ -550,7 +550,7 @@ export default function MarketPage() {
               <button
                 onClick={handleClearCache}
                 disabled={clearing || seeding}
-                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-red-600/40 text-red-400 hover:text-white hover:border-red-400 transition-colors disabled:opacity-50"
+                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-red-600/40 text-red-400 hover:text-slate-900 hover:border-red-400 transition-colors disabled:opacity-50"
                 title="Wipe all cached predictions and re-seed fresh data"
               >
                 <RefreshCw size={11} className={clearing ? 'animate-spin' : ''} />
@@ -559,7 +559,7 @@ export default function MarketPage() {
               <button
                 onClick={handleReseed}
                 disabled={seeding || clearing}
-                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-slate-400 transition-colors disabled:opacity-50"
+                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-colors disabled:opacity-50"
               >
                 <RefreshCw size={11} className={seeding ? 'animate-spin' : ''} />
                 {seeding ? 'Seeding…' : 'Refresh Seeds'}
@@ -570,7 +570,7 @@ export default function MarketPage() {
           {data.top_buys?.length > 0 ? (
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-slate-700/40">
+                <tr className="border-b border-slate-200/80">
                   {['Make', 'Model', 'Year', 'Predicted', '30d Forecast', '90d Forecast', 'Method', 'Signal', ''].map(h => (
                     <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
                       {h}
@@ -578,16 +578,16 @@ export default function MarketPage() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700/30">
+              <tbody className="divide-y divide-slate-200/80">
                 {data.top_buys.map((row, i) => (
                   <tr
                     key={i}
                     onClick={() => navigate(`/?make=${row.make}&model=${row.model}&year=${row.year}`)}
-                    className="hover:bg-slate-700/40 cursor-pointer transition-colors group"
+                    className="hover:bg-slate-100/40 cursor-pointer transition-colors group"
                   >
-                    <td className="px-4 py-4 font-semibold text-white capitalize">{row.make}</td>
-                    <td className="px-4 py-4 text-slate-300 capitalize">{row.model}</td>
-                    <td className="px-4 py-4 text-slate-300">{row.year}</td>
+                    <td className="px-4 py-4 font-semibold text-slate-900 capitalize">{row.make}</td>
+                    <td className="px-4 py-4 text-slate-600 capitalize">{row.model}</td>
+                    <td className="px-4 py-4 text-slate-600">{row.year}</td>
                     <td className="px-4 py-4 font-bold text-blue-400">
                       {row.predicted_price ? `$${Number(row.predicted_price).toLocaleString()}` : '—'}
                     </td>
@@ -606,7 +606,7 @@ export default function MarketPage() {
                       </span>
                     </td>
                     <td className="px-4 py-4">
-                      <ArrowRight size={15} className="text-slate-600 group-hover:text-slate-300 transition-colors" />
+                      <ArrowRight size={15} className="text-slate-600 group-hover:text-slate-600 transition-colors" />
                     </td>
                   </tr>
                 ))}
@@ -619,7 +619,7 @@ export default function MarketPage() {
               <button
                 onClick={handleReseed}
                 disabled={seeding}
-                className="mt-3 flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-colors disabled:opacity-50"
+                className="mt-3 flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-slate-900 text-xs font-semibold transition-colors disabled:opacity-50"
               >
                 <Sparkles size={12} />
                 {seeding ? 'Seeding…' : 'Populate with Pre-computed Signals'}
@@ -630,21 +630,21 @@ export default function MarketPage() {
 
         {/* ── AI Key Insights strip ── */}
         {data.top_buys?.some(b => b.llm_key_insight) && (
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles size={16} className="text-purple-400" />
-              <h2 className="text-lg font-bold text-white">AI Market Insights</h2>
+              <h2 className="text-lg font-bold text-slate-900">AI Market Insights</h2>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-400 border border-purple-500/20 font-semibold">GPT-4o-mini</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {data.top_buys.filter(b => b.llm_key_insight).slice(0, 4).map((b, i) => (
-                <div key={i} className="flex gap-3 p-3 bg-slate-900/60 rounded-xl border border-slate-700/40">
+                <div key={i} className="flex gap-3 p-3 bg-[#F5F0E8]/60 rounded-xl border border-slate-200/80">
                   <div className="w-1.5 rounded-full bg-purple-500/60 flex-shrink-0" />
                   <div>
-                    <p className="text-xs font-semibold text-white capitalize mb-0.5">
+                    <p className="text-xs font-semibold text-slate-900 capitalize mb-0.5">
                       {b.year} {b.make} {b.model}
                     </p>
-                    <p className="text-xs text-slate-400 leading-relaxed">{b.llm_key_insight}</p>
+                    <p className="text-xs text-slate-600 leading-relaxed">{b.llm_key_insight}</p>
                   </div>
                 </div>
               ))}
@@ -653,18 +653,18 @@ export default function MarketPage() {
         )}
 
         {/* ── US Map: Top Manufacturer by State ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-start justify-between flex-wrap gap-2 mb-1">
             <div>
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <MapPin size={18} className="text-blue-400" />
                 Top Manufacturer by State
               </h2>
-              <p className="text-slate-400 text-sm mt-1">
+              <p className="text-slate-600 text-sm mt-1">
                 State colored by most-listed manufacturer · Hover for details · Click to explore in playground
               </p>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-700/40 px-3 py-1.5 rounded-lg">
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-100/40 px-3 py-1.5 rounded-lg">
               <Info size={11} />
               {Object.keys(US_STATE_DATA).length} states · 328k+ listings
             </div>
@@ -679,14 +679,14 @@ export default function MarketPage() {
         </div>
 
         {/* ── State Playground ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-start justify-between flex-wrap gap-2 mb-5">
             <div>
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <BarChart2 size={18} className="text-emerald-400" />
                 State Market Playground
               </h2>
-              <p className="text-slate-400 text-sm mt-1">
+              <p className="text-slate-600 text-sm mt-1">
                 Select a state (or click the map above) to explore top manufacturers, prices, and inventory
               </p>
             </div>
@@ -695,16 +695,16 @@ export default function MarketPage() {
         </div>
 
         {/* ── Seasonality chart (compact) ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-start justify-between flex-wrap gap-2 mb-1">
-            <h2 className="text-xl font-bold text-white">Best Months to Buy</h2>
+            <h2 className="text-xl font-bold text-slate-900">Best Months to Buy</h2>
             {data.seasonality_source === 'industry' && (
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-600/40 text-slate-400 border border-slate-600/40 font-medium">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-600/40 text-slate-600 border border-slate-300/40 font-medium">
                 Industry averages · No DB data yet
               </span>
             )}
           </div>
-          <p className="text-slate-400 text-sm mb-6">
+          <p className="text-slate-600 text-sm mb-6">
             Average listing price by calendar month ·&nbsp;
             <span className="text-blue-400">Blue</span> = cheapest &nbsp;·&nbsp;
             <span className="text-red-400">Red</span> = most expensive
@@ -716,9 +716,9 @@ export default function MarketPage() {
                 data={data.seasonality_data.map(s => ({ ...s, name: MONTH_NAMES[s.month] ?? s.month }))}
                 margin={{ top: 4, right: 8, bottom: 0, left: 8 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#64748b' }} />
-                <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 11, fill: '#64748b' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#475569' }} />
+                <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 11, fill: '#475569' }} />
                 <ReTooltip
                   contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', fontSize: 12 }}
                   labelStyle={{ color: '#e2e8f0' }}
@@ -737,7 +737,7 @@ export default function MarketPage() {
             </div>
           )}
 
-          <p className="text-xs text-slate-600 mt-4 border-t border-slate-700/40 pt-3">
+          <p className="text-xs text-slate-600 mt-4 border-t border-slate-200/80 pt-3">
             {data.seasonality_source === 'industry'
               ? 'Source: US used-car market industry averages — populate DB with listings for real data'
               : `Source: Craigslist listings snapshot · ${data.updated_at}`

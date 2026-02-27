@@ -49,7 +49,7 @@ const DATA_SOURCES = [
   { color: '#ec4899', label: 'Facebook Prophet',          detail: '30/90-day price forecasting · yearly seasonality',       tag: 'Forecast'     },
   { color: '#6366f1', label: 'Multi-Agent Orchestrator',  detail: '7 modular Python agents · deterministic pipeline',       tag: 'Architecture' },
   { color: '#22c55e', label: 'EthicsAgent',               detail: 'Transparency notes · bias audit · principled AI layer',  tag: 'Ethics'       },
-  { color: '#64748b', label: 'Dataset Snapshot',          detail: 'Jan 2024 · Static for demo · update on demand',         tag: 'Freshness'    },
+  { color: '#475569', label: 'Dataset Snapshot',          detail: 'Jan 2024 · Static for demo · update on demand',         tag: 'Freshness'    },
 ]
 
 
@@ -64,16 +64,16 @@ export default function TechPage() {
     <div className="min-h-screen">
 
       {/* ── Hero ── */}
-      <div className="bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700/50">
+      <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
             <Layers size={12} />
             Principled AI · Multi-Agent Architecture
           </div>
-          <h1 className="text-4xl font-extrabold text-white mb-2">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
             System <span className="text-blue-400">Architecture</span>
           </h1>
-          <p className="text-slate-400 text-base max-w-2xl">
+          <p className="text-slate-600 text-base max-w-2xl">
             A modular 7-agent decision intelligence pipeline. Deterministic Python orchestration
             with GPT-4o-mini used only where human-level reasoning adds value —
             never for routing or decision-making.
@@ -84,10 +84,10 @@ export default function TechPage() {
       <div className="max-w-7xl mx-auto px-6 mt-8 space-y-8 pb-12">
 
         {/* ── Microservice Flow Diagram ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-1">
             <Layers size={18} className="text-blue-400" />
-            <h2 className="text-xl font-bold text-white">Microservice Architecture</h2>
+            <h2 className="text-xl font-bold text-slate-900">Microservice Architecture</h2>
             <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20 font-semibold ml-1">
               Animated
             </span>
@@ -98,7 +98,7 @@ export default function TechPage() {
               Circuit Breaker
             </span>
           </div>
-          <p className="text-slate-400 text-sm mb-4">
+          <p className="text-slate-600 text-sm mb-4">
             End-to-end request flow: API Gateway → Rate Limiter → Orchestrator → Pub/Sub event bus →
             sequential &amp; parallel agent phases → MongoDB + Redis → Structured Intel Report.
           </p>
@@ -106,30 +106,30 @@ export default function TechPage() {
         </div>
 
         {/* ── Decision Rules ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-2">
             <Scale size={18} className="text-blue-400" />
-            <h2 className="text-xl font-bold text-white">Decision Rules</h2>
+            <h2 className="text-xl font-bold text-slate-900">Decision Rules</h2>
             <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-semibold ml-1">
               Deterministic · Auditable
             </span>
           </div>
-          <p className="text-slate-400 text-sm mb-5">
+          <p className="text-slate-600 text-sm mb-5">
             DecisionAgent applies three ordered rules in pure Python — no LLM, no randomness.
             Every recommendation traces to exact numerical thresholds.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {DECISION_RULES.map((r, i) => (
-              <div key={i} className="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+              <div key={i} className="bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs text-slate-500 font-mono bg-slate-800 px-2 py-0.5 rounded">
+                  <span className="text-xs text-slate-500 font-mono bg-white px-2 py-0.5 rounded">
                     Rule {i + 1 <= 3 ? i + 1 : '∗'}
                   </span>
                   <span className={`text-xs px-2 py-0.5 rounded border font-bold ${r.badge}`}>
                     {r.result}
                   </span>
                 </div>
-                <p className="text-white text-xs font-mono mb-1.5 leading-relaxed">{r.cond}</p>
+                <p className="text-slate-900 text-xs font-mono mb-1.5 leading-relaxed">{r.cond}</p>
                 <p className="text-slate-500 text-xs">{r.desc}</p>
               </div>
             ))}
@@ -139,12 +139,12 @@ export default function TechPage() {
         {/* ── SHAP + Model Card ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-1">
               <BarChart2 size={18} className="text-blue-400" />
-              <h2 className="text-xl font-bold text-white">What Drives Car Prices?</h2>
+              <h2 className="text-xl font-bold text-slate-900">What Drives Car Prices?</h2>
             </div>
-            <p className="text-slate-400 text-sm mb-4">
+            <p className="text-slate-600 text-sm mb-4">
               Global SHAP importance from 500 held-out test listings.&nbsp;
               <span className="text-emerald-400">Green</span> = increases price ·&nbsp;
               <span className="text-blue-400">Blue</span> = decreases price
@@ -152,8 +152,8 @@ export default function TechPage() {
 
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={STATIC_SHAP} layout="vertical" margin={{ left: 10, right: 30 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                <XAxis type="number" tickFormatter={v => v.toFixed(3)} tick={{ fontSize: 10, fill: '#64748b' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+                <XAxis type="number" tickFormatter={v => v.toFixed(3)} tick={{ fontSize: 10, fill: '#475569' }} />
                 <YAxis type="category" dataKey="feature" width={130}
                   tickFormatter={v => v.replace(/_/g, ' ')} tick={{ fontSize: 11, fill: '#cbd5e1' }} />
                 <Tooltip {...chartTooltipStyle}
@@ -168,17 +168,17 @@ export default function TechPage() {
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-4">
               <Cpu size={18} className="text-blue-400" />
-              <h2 className="text-xl font-bold text-white">Model Card</h2>
+              <h2 className="text-xl font-bold text-slate-900">Model Card</h2>
             </div>
 
             <div className="space-y-3 mb-6">
               {MODEL_ROWS.map(r => (
-                <div key={r.label} className="flex gap-3 text-sm border-b border-slate-700/40 pb-3 last:border-0 last:pb-0">
+                <div key={r.label} className="flex gap-3 text-sm border-b border-slate-200/80 pb-3 last:border-0 last:pb-0">
                   <span className="text-slate-500 w-36 flex-shrink-0 font-medium">{r.label}</span>
-                  <span className="text-slate-200">{r.value}</span>
+                  <span className="text-slate-700">{r.value}</span>
                 </div>
               ))}
             </div>
@@ -213,20 +213,20 @@ export default function TechPage() {
         </div>
 
         {/* ── Data Sources ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-4">
             <BookOpen size={18} className="text-blue-400" />
-            <h2 className="text-xl font-bold text-white">Data Sources &amp; Stack</h2>
+            <h2 className="text-xl font-bold text-slate-900">Data Sources &amp; Stack</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {DATA_SOURCES.map(s => (
               <div key={s.label}
-                className="bg-slate-900/50 border border-slate-700 rounded-xl p-4 flex items-start gap-3 hover:border-slate-600 transition-colors">
+                className="bg-[#F5F0E8]/50 border border-slate-200 rounded-xl p-4 flex items-start gap-3 hover:border-slate-300 transition-colors">
                 <div className="w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: s.color }} />
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-white text-sm font-semibold">{s.label}</span>
-                    <span className="text-xs px-1.5 py-0.5 rounded bg-slate-700 text-slate-400 font-medium">{s.tag}</span>
+                    <span className="text-slate-900 text-sm font-semibold">{s.label}</span>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-medium">{s.tag}</span>
                   </div>
                   <p className="text-slate-500 text-xs mt-0.5 leading-relaxed">{s.detail}</p>
                 </div>

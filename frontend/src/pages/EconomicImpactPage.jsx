@@ -75,16 +75,16 @@ export default function EconomicImpactPage() {
     <div className="min-h-screen">
 
       {/* ── Hero ── */}
-      <div className="bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700/50">
+      <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase tracking-widest mb-3">
             <Globe size={12} />
             Economic Impact · Principled AI Spark Challenge
           </div>
-          <h1 className="text-4xl font-extrabold text-white mb-2">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
             Economic <span className="text-amber-400">Impact</span>
           </h1>
-          <p className="text-slate-400 text-base max-w-2xl">
+          <p className="text-slate-600 text-base max-w-2xl">
             CarIntel reduces information asymmetry in the $841 billion US used car market —
             saving consumers money, improving market efficiency, and accelerating the EV transition.
           </p>
@@ -97,10 +97,10 @@ export default function EconomicImpactPage() {
               { label: 'US used car market size',        value: '$841B',  sub: 'annual market', color: 'text-blue-400',    icon: BarChart2 },
               { label: 'Price efficiency improvement',   value: '+16%',   sub: 'vs no-AI baseline', color: 'text-purple-400', icon: TrendingUp },
             ].map(({ label, value, sub, color, icon: Icon }) => (
-              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-2xl p-4">
+              <div key={label} className="bg-white/80 border border-slate-200 rounded-2xl p-4">
                 <Icon size={18} className={`${color} mb-2`} />
                 <p className={`text-3xl font-black ${color}`}>{value}</p>
-                <p className="text-slate-300 text-xs font-medium mt-0.5">{sub}</p>
+                <p className="text-slate-600 text-xs font-medium mt-0.5">{sub}</p>
                 <p className="text-slate-500 text-xs mt-1">{label}</p>
               </div>
             ))}
@@ -112,9 +112,9 @@ export default function EconomicImpactPage() {
 
         {/* ── Information Asymmetry Chart ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h2 className="text-white font-bold text-lg mb-1">Market Efficiency Over Time</h2>
-            <p className="text-slate-400 text-sm mb-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-slate-900 font-bold text-lg mb-1">Market Efficiency Over Time</h2>
+            <p className="text-slate-600 text-sm mb-4">
               Used car market efficiency score (100 = perfect price discovery).
               COVID-era supply shortages caused a sharp decline.
             </p>
@@ -126,9 +126,9 @@ export default function EconomicImpactPage() {
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#64748b' }} />
-                <YAxis domain={[30, 100]} tick={{ fontSize: 10, fill: '#64748b' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
+                <YAxis domain={[30, 100]} tick={{ fontSize: 10, fill: '#475569' }} />
                 <Tooltip {...chartStyle} formatter={v => [`${v}`, 'Efficiency Score']} />
                 <Area type="monotone" dataKey="market_efficiency" stroke="#10b981"
                   fill="url(#effGrad)" strokeWidth={2}
@@ -138,16 +138,16 @@ export default function EconomicImpactPage() {
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h2 className="text-white font-bold text-lg mb-1">Buyer Overpayment Rate</h2>
-            <p className="text-slate-400 text-sm mb-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-slate-900 font-bold text-lg mb-1">Buyer Overpayment Rate</h2>
+            <p className="text-slate-600 text-sm mb-4">
               Average % buyers paid above fair market value — highest during supply crunch.
             </p>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={INFORMATION_ASYMMETRY} margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#64748b' }} />
-                <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickFormatter={v => `${v}%`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
+                <YAxis tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={v => `${v}%`} />
                 <Tooltip {...chartStyle} formatter={v => [`${v}%`, 'Overpayment Rate']} />
                 <Bar dataKey="overprice_pct" radius={[4, 4, 0, 0]}>
                   {INFORMATION_ASYMMETRY.map((d, i) => (
@@ -160,22 +160,22 @@ export default function EconomicImpactPage() {
         </div>
 
         {/* ── Consumer Savings by Group ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-          <h2 className="text-white font-bold text-lg mb-1">Consumer Savings by Buyer Group</h2>
-          <p className="text-slate-400 text-sm mb-5">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
+          <h2 className="text-slate-900 font-bold text-lg mb-1">Consumer Savings by Buyer Group</h2>
+          <p className="text-slate-600 text-sm mb-5">
             Vulnerable buyers benefit most — first-time buyers and rural consumers face the highest information asymmetry.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
             {CONSUMER_SAVINGS.map(row => (
-              <div key={row.group} className="bg-slate-900/60 border border-slate-700 rounded-xl p-4 text-center">
-                <p className="text-slate-400 text-xs font-medium mb-3">{row.group}</p>
+              <div key={row.group} className="bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4 text-center">
+                <p className="text-slate-600 text-xs font-medium mb-3">{row.group}</p>
                 <div className="space-y-2">
                   <div>
                     <p className="text-red-400 text-xs text-slate-600">Without AI</p>
                     <p className="text-red-400 font-bold">${row.avg_overpay.toLocaleString()}</p>
                     <p className="text-slate-600 text-[10px]">avg overpay</p>
                   </div>
-                  <div className="border-t border-slate-700 pt-2">
+                  <div className="border-t border-slate-200 pt-2">
                     <p className="text-emerald-400 text-xs">With CarIntel</p>
                     <p className="text-emerald-400 font-bold">${row.with_ai.toLocaleString()}</p>
                     <p className="text-slate-600 text-[10px]">avg overpay</p>
@@ -193,9 +193,9 @@ export default function EconomicImpactPage() {
         {/* ── Market Impact + EV Transition ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h2 className="text-white font-bold text-lg mb-1">Market Segment Efficiency Gains</h2>
-            <p className="text-slate-400 text-sm mb-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-slate-900 font-bold text-lg mb-1">Market Segment Efficiency Gains</h2>
+            <p className="text-slate-600 text-sm mb-4">
               Click a segment to explore. EVs show the largest potential gain due to sparse historical data.
             </p>
             <div className="space-y-3">
@@ -204,24 +204,24 @@ export default function EconomicImpactPage() {
                   onClick={() => setActiveSegment(activeSegment === seg.segment ? null : seg.segment)}
                   className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left ${
                     activeSegment === seg.segment
-                      ? 'bg-slate-700 border-slate-500'
-                      : 'bg-slate-900/60 border-slate-700 hover:border-slate-600'
+                      ? 'bg-slate-100 border-slate-500'
+                      : 'bg-[#F5F0E8]/60 border-slate-200 hover:border-slate-300'
                   }`}>
                   <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: seg.color }} />
-                  <span className="text-white text-sm font-medium flex-1">{seg.segment}</span>
-                  <span className="text-slate-400 text-xs">${seg.total_market}B market</span>
+                  <span className="text-slate-900 text-sm font-medium flex-1">{seg.segment}</span>
+                  <span className="text-slate-600 text-xs">${seg.total_market}B market</span>
                   <span className="font-bold text-sm" style={{ color: seg.color }}>+{seg.efficiency_gain}%</span>
                 </button>
               ))}
             </div>
             {activeSegment && (
-              <div className="mt-4 bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+              <div className="mt-4 bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4">
                 {(() => {
                   const s = MARKET_SEGMENTS.find(x => x.segment === activeSegment)
                   return (
                     <div>
-                      <p className="text-white font-semibold mb-1">{s.segment} Segment</p>
-                      <p className="text-slate-400 text-xs">
+                      <p className="text-slate-900 font-semibold mb-1">{s.segment} Segment</p>
+                      <p className="text-slate-600 text-xs">
                         ${s.total_market}B annual market · AI price intelligence could improve pricing efficiency by {s.efficiency_gain}%,
                         representing <span className="text-emerald-400 font-bold">${(s.total_market * s.efficiency_gain / 100).toFixed(1)}B</span> in
                         annual consumer surplus recovery.
@@ -233,17 +233,17 @@ export default function EconomicImpactPage() {
             )}
           </div>
 
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h2 className="text-white font-bold text-lg mb-1">EV Transition Impact</h2>
-            <p className="text-slate-400 text-sm mb-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-slate-900 font-bold text-lg mb-1">EV Transition Impact</h2>
+            <p className="text-slate-600 text-sm mb-4">
               As EV market share grows, AI price intelligence becomes critical — historical
               data is sparse and prices are volatile.
             </p>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={EV_TRANSITION} margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#64748b' }} />
-                <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
+                <YAxis tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} />
                 <Tooltip {...chartStyle} formatter={v => [`$${v.toLocaleString()}`, '']} />
                 <Line type="monotone" dataKey="avg_ev_price" stroke="#8b5cf6" strokeWidth={2} dot={false} name="EV avg price" />
                 <Line type="monotone" dataKey="avg_ice_price" stroke="#3b82f6" strokeWidth={2} dot={false} name="ICE avg price" />
@@ -257,12 +257,12 @@ export default function EconomicImpactPage() {
         </div>
 
         {/* ── Scale Calculator ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-2">
             <Zap size={18} className="text-amber-400" />
-            <h2 className="text-white font-bold text-lg">Scale Impact Calculator</h2>
+            <h2 className="text-slate-900 font-bold text-lg">Scale Impact Calculator</h2>
           </div>
-          <p className="text-slate-400 text-sm mb-5">
+          <p className="text-slate-600 text-sm mb-5">
             Select adoption scale to see aggregate economic impact.
             Assumes avg $1,410 savings per transaction.
           </p>
@@ -272,10 +272,10 @@ export default function EconomicImpactPage() {
                 className={`p-4 rounded-xl border text-left transition-all ${
                   scaleTier === i
                     ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
-                    : 'bg-slate-900/60 border-slate-700 text-slate-400 hover:border-slate-600'
+                    : 'bg-[#F5F0E8]/60 border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}>
                 <p className="text-xs font-medium mb-1">{s.label}</p>
-                <p className="text-white font-bold">${s.annual_savings}</p>
+                <p className="text-slate-900 font-bold">${s.annual_savings}</p>
                 <p className="text-[10px] text-slate-500 mt-0.5">annual savings</p>
               </button>
             ))}
@@ -286,7 +286,7 @@ export default function EconomicImpactPage() {
               { label: 'GDP Efficiency Effect', value: `$${MULTIPLIER_SCENARIOS[scaleTier].gdp_effect}`, color: 'text-blue-400', desc: 'Multiplier effect from reduced transaction friction (3x)' },
               { label: 'Market Segments Impacted', value: '6', color: 'text-purple-400', desc: 'Sedans, SUVs, Trucks, EVs, Compact, Luxury' },
             ].map(m => (
-              <div key={m.label} className="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+              <div key={m.label} className="bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4">
                 <p className="text-slate-500 text-xs mb-1">{m.label}</p>
                 <p className={`text-2xl font-black ${m.color}`}>{m.value}</p>
                 <p className="text-slate-600 text-xs mt-1">{m.desc}</p>
@@ -296,16 +296,16 @@ export default function EconomicImpactPage() {
         </div>
 
         {/* ── Regional Impact ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-          <h2 className="text-white font-bold text-lg mb-1">Regional Price Disparity Reduction</h2>
-          <p className="text-slate-400 text-sm mb-5">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
+          <h2 className="text-slate-900 font-bold text-lg mb-1">Regional Price Disparity Reduction</h2>
+          <p className="text-slate-600 text-sm mb-5">
             Rural and Southeast buyers face the highest price disparity vs urban markets.
             AI price intelligence levels the playing field.
           </p>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={REGIONAL_IMPACT} layout="vertical" margin={{ left: 20, right: 40 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-              <XAxis type="number" tickFormatter={v => `${v}%`} tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+              <XAxis type="number" tickFormatter={v => `${v}%`} tick={{ fontSize: 10, fill: '#475569' }} />
               <YAxis type="category" dataKey="region" width={130} tick={{ fontSize: 11, fill: '#cbd5e1' }} />
               <Tooltip {...chartStyle} formatter={v => [`${v}%`, 'Price disparity']} />
               <Bar dataKey="price_disparity" radius={[0, 4, 4, 0]} name="Price disparity">

@@ -72,7 +72,7 @@ const TOP_MAKES = [
   { make: 'GMC',        share:  5.4, avg_price: 27400, change: -0.8, color: '#22c55e' },
   { make: 'Hyundai',    share:  4.8, avg_price: 18100, change: +1.8, color: '#a78bfa' },
   { make: 'Ram',        share:  4.2, avg_price: 28200, change: -1.6, color: '#6366f1' },
-  { make: 'Other',      share: 11.3, avg_price: 19800, change: +0.2, color: '#64748b' },
+  { make: 'Other',      share: 11.3, avg_price: 19800, change: +0.2, color: '#475569' },
 ]
 
 const SEGMENTS = [
@@ -117,16 +117,16 @@ export default function MarketTrendsPage() {
     <div className="min-h-screen">
 
       {/* ── Hero ── */}
-      <div className="bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700/50">
+      <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
             <BarChart2 size={12} />
             Market Intelligence · 2020 – 2024 Analysis
           </div>
-          <h1 className="text-4xl font-extrabold text-white mb-1">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-1">
             Market <span className="text-blue-400">Trends</span>
           </h1>
-          <p className="text-slate-400 text-base max-w-2xl">
+          <p className="text-slate-600 text-base max-w-2xl">
             US used car market dynamics from COVID disruption through normalization.
             Regional breakdowns, segment analysis, and make-by-make trends.
           </p>
@@ -139,9 +139,9 @@ export default function MarketTrendsPage() {
               { label: 'Total Active Listings',      value: '4.2M',   sub: 'Nationwide inventory', color: 'text-emerald-400' },
               { label: 'Used vs New Spread',         value: '$25.4k', sub: 'New avg: $45,000',     color: 'text-purple-400' },
             ].map(({ label, value, sub, color }) => (
-              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-2xl p-4">
+              <div key={label} className="bg-white/80 border border-slate-200 rounded-2xl p-4">
                 <p className={`text-2xl font-black ${color}`}>{value}</p>
-                <p className="text-slate-300 text-xs font-medium mt-0.5">{sub}</p>
+                <p className="text-slate-600 text-xs font-medium mt-0.5">{sub}</p>
                 <p className="text-slate-500 text-xs mt-1">{label}</p>
               </div>
             ))}
@@ -152,11 +152,11 @@ export default function MarketTrendsPage() {
       <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
 
         {/* ── Used vs New Price Chart ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
             <div>
-              <h2 className="text-white font-bold text-lg">Used vs New Car Price Index (2020–2024)</h2>
-              <p className="text-slate-400 text-sm">COVID supply crunch drove used prices to within $19k of new — historically unprecedented</p>
+              <h2 className="text-slate-900 font-bold text-lg">Used vs New Car Price Index (2020–2024)</h2>
+              <p className="text-slate-600 text-sm">COVID supply crunch drove used prices to within $19k of new — historically unprecedented</p>
             </div>
             <div className="flex gap-2">
               {[
@@ -168,7 +168,7 @@ export default function MarketTrendsPage() {
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     chartView === opt.key
                       ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                      : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-600'
                   }`}>
                   {opt.label}
                 </button>
@@ -188,9 +188,9 @@ export default function MarketTrendsPage() {
                   <stop offset="95%" stopColor="#f97316" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-              <XAxis dataKey="month" tick={{ fontSize: 9, fill: '#64748b' }} interval={3} />
-              <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="month" tick={{ fontSize: 9, fill: '#475569' }} interval={3} />
+              <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#475569' }} />
               <Tooltip {...chartStyle} formatter={v => [`$${Number(v).toLocaleString()}`, '']} />
               <ReferenceLine x="Jul 21" stroke="#ef4444" strokeDasharray="4 4"
                 label={{ value: 'Peak', fontSize: 9, fill: '#ef4444', position: 'top' }} />
@@ -202,7 +202,7 @@ export default function MarketTrendsPage() {
                 <Area type="monotone" dataKey="newCar" stroke="#f97316" fill="url(#newGrad)"
                   strokeWidth={2} name="New car avg" dot={false} />
               )}
-              <Legend wrapperStyle={{ color: '#64748b', fontSize: 11 }} />
+              <Legend wrapperStyle={{ color: '#475569', fontSize: 11 }} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -211,32 +211,32 @@ export default function MarketTrendsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* 12-month make trends */}
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h2 className="text-white font-bold text-lg mb-1">12-Month Price Trend by Make</h2>
-            <p className="text-slate-400 text-sm mb-4">Jeep leads appreciation; Honda steady; Ford/Toyota stable</p>
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-slate-900 font-bold text-lg mb-1">12-Month Price Trend by Make</h2>
+            <p className="text-slate-600 text-sm mb-4">Jeep leads appreciation; Honda steady; Ford/Toyota stable</p>
             <ResponsiveContainer width="100%" height={280}>
               <LineChart data={MAKE_TRENDS_12M} margin={{ top: 4, right: 8, bottom: 0, left: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#64748b' }} />
-                <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} domain={['auto', 'auto']} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#475569' }} />
+                <YAxis tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#475569' }} domain={['auto', 'auto']} />
                 <Tooltip {...chartStyle} formatter={v => [`$${Number(v).toLocaleString()}`, '']} />
                 <Line type="monotone" dataKey="ford"   stroke="#3b82f6" strokeWidth={2} dot={false} name="Ford" />
                 <Line type="monotone" dataKey="toyota" stroke="#10b981" strokeWidth={2} dot={false} name="Toyota" />
                 <Line type="monotone" dataKey="honda"  stroke="#ec4899" strokeWidth={2} dot={false} name="Honda" />
                 <Line type="monotone" dataKey="jeep"   stroke="#f59e0b" strokeWidth={2} dot={false} name="Jeep" />
-                <Legend wrapperStyle={{ color: '#64748b', fontSize: 11 }} />
+                <Legend wrapperStyle={{ color: '#475569', fontSize: 11 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
 
           {/* Segment prices */}
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h2 className="text-white font-bold text-lg mb-1">Price by Segment (Dec 2024)</h2>
-            <p className="text-slate-400 text-sm mb-4">EVs still premium-priced; trucks remain highest ICE segment</p>
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h2 className="text-slate-900 font-bold text-lg mb-1">Price by Segment (Dec 2024)</h2>
+            <p className="text-slate-600 text-sm mb-4">EVs still premium-priced; trucks remain highest ICE segment</p>
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={SEGMENTS} layout="vertical" margin={{ left: 10, right: 40 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+                <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#475569' }} />
                 <YAxis type="category" dataKey="segment" width={70} tick={{ fontSize: 11, fill: '#cbd5e1' }} />
                 <Tooltip {...chartStyle} formatter={v => [`$${Number(v).toLocaleString()}`, 'Avg price']} />
                 <Bar dataKey="avg" radius={[0, 4, 4, 0]}>
@@ -248,19 +248,19 @@ export default function MarketTrendsPage() {
         </div>
 
         {/* ── Regional Market Heat ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-2">
             <Globe size={18} className="text-blue-400" />
-            <h2 className="text-white font-bold text-lg">Regional Price Heat Map (Dec 2024)</h2>
+            <h2 className="text-slate-900 font-bold text-lg">Regional Price Heat Map (Dec 2024)</h2>
           </div>
-          <p className="text-slate-400 text-sm mb-5">
+          <p className="text-slate-600 text-sm mb-5">
             California commands a $6,300 premium over Missouri — regional demand, regulations, and income levels drive disparity.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <ResponsiveContainer width="100%" height={480}>
               <BarChart data={REGIONAL_PRICES} layout="vertical" margin={{ left: 10, right: 60 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#64748b' }} domain={[12000, 'auto']} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+                <XAxis type="number" tickFormatter={v => `$${(v/1000).toFixed(0)}k`} tick={{ fontSize: 10, fill: '#475569' }} domain={[12000, 'auto']} />
                 <YAxis type="category" dataKey="region" width={110} tick={{ fontSize: 11, fill: '#cbd5e1' }} />
                 <Tooltip {...chartStyle} formatter={v => [`$${Number(v).toLocaleString()}`, 'Avg price']} />
                 <Bar dataKey="avg" radius={[0, 4, 4, 0]}>
@@ -271,10 +271,10 @@ export default function MarketTrendsPage() {
 
             <div className="space-y-2 overflow-y-auto" style={{maxHeight: '480px'}}>
               {REGIONAL_PRICES.map(r => (
-                <div key={r.region} className="flex items-center gap-3 p-3 bg-slate-900/60 rounded-xl border border-slate-700">
+                <div key={r.region} className="flex items-center gap-3 p-3 bg-[#F5F0E8]/60 rounded-xl border border-slate-200">
                   <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: r.color }} />
-                  <span className="text-white text-sm flex-1">{r.region}</span>
-                  <span className="text-slate-300 font-bold">${r.avg.toLocaleString()}</span>
+                  <span className="text-slate-900 text-sm flex-1">{r.region}</span>
+                  <span className="text-slate-600 font-bold">${r.avg.toLocaleString()}</span>
                   <span className={`text-xs font-semibold w-12 text-right ${r.change > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {r.change > 0 ? '+' : ''}{r.change}%
                   </span>
@@ -286,16 +286,16 @@ export default function MarketTrendsPage() {
         </div>
 
         {/* ── Top Makes Market Share ── */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-          <h2 className="text-white font-bold text-lg mb-1">Market Share by Make (Dec 2024)</h2>
-          <p className="text-slate-400 text-sm mb-5">Ford leads with 18.2% of all used car listings; Toyota second at 16.4%</p>
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
+          <h2 className="text-slate-900 font-bold text-lg mb-1">Market Share by Make (Dec 2024)</h2>
+          <p className="text-slate-600 text-sm mb-5">Ford leads with 18.2% of all used car listings; Toyota second at 16.4%</p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             {TOP_MAKES.slice(0, 10).map(m => (
-              <div key={m.make} className="bg-slate-900/60 border border-slate-700 rounded-xl p-4 text-center hover:border-slate-500 transition-colors">
+              <div key={m.make} className="bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4 text-center hover:border-slate-300 transition-colors">
                 <div className="w-2 h-2 rounded-full mx-auto mb-2" style={{ background: m.color }} />
-                <p className="text-white font-bold">{m.make}</p>
+                <p className="text-slate-900 font-bold">{m.make}</p>
                 <p className="text-2xl font-black mt-1" style={{ color: m.color }}>{m.share}%</p>
-                <p className="text-slate-400 text-xs mt-1">${m.avg_price.toLocaleString()}</p>
+                <p className="text-slate-600 text-xs mt-1">${m.avg_price.toLocaleString()}</p>
                 <p className={`text-xs font-semibold mt-0.5 ${m.change > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                   {m.change > 0 ? '+' : ''}{m.change}% MoM
                 </p>

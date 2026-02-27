@@ -441,7 +441,7 @@ function ConfidenceGauge({ score }) {
       <svg width="100" height="58" viewBox="0 0 100 58">
         {/* Background arc */}
         <path d="M 10 52 A 40 40 0 0 1 90 52"
-          fill="none" stroke="#1e293b" strokeWidth="8" strokeLinecap="round" />
+          fill="none" stroke="#e2e8f0" strokeWidth="8" strokeLinecap="round" />
         {/* Foreground arc */}
         <path d="M 10 52 A 40 40 0 0 1 90 52"
           fill="none" stroke={color} strokeWidth="8" strokeLinecap="round"
@@ -499,11 +499,11 @@ function AgentReasoningLog({ agentLog }) {
               <div className={`w-7 h-7 rounded-full flex items-center justify-center mt-0.5 ${statusColor}`}>
                 <IconComp size={12} />
               </div>
-              {!isLast && <div className="w-px flex-1 bg-slate-700/60 my-1" />}
+              {!isLast && <div className="w-px flex-1 bg-slate-100/60 my-1" />}
             </div>
             <div className={`flex-1 ${isLast ? 'pb-0' : 'pb-3'}`}>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-semibold text-white">{entry.agent}</span>
+                <span className="text-xs font-semibold text-slate-900">{entry.agent}</span>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
                   entry.status === 'ok' ? 'bg-emerald-500/15 text-emerald-400' :
                   entry.status === 'fallback' ? 'bg-amber-500/15 text-amber-400' :
@@ -517,7 +517,7 @@ function AgentReasoningLog({ agentLog }) {
                   {Object.entries(entry.output).slice(0, 3).map(([k, v]) => (
                     <span key={k} className="text-[10px] text-slate-600">
                       <span className="text-slate-500">{k.replace(/_/g, ' ')}: </span>
-                      <span className="text-slate-400">{typeof v === 'number' ? (Math.abs(v) >= 1000 ? `$${Number(v).toLocaleString()}` : String(v)) : String(v)}</span>
+                      <span className="text-slate-600">{typeof v === 'number' ? (Math.abs(v) >= 1000 ? `$${Number(v).toLocaleString()}` : String(v)) : String(v)}</span>
                     </span>
                   ))}
                 </div>
@@ -539,11 +539,11 @@ function ScenarioPanel({ basePct, projectedPrice }) {
     ? Math.round(projectedPrice * (1 + scenario.delta / 100))
     : projectedPrice
 
-  const pctColor = adjPct > 0 ? 'text-emerald-400' : adjPct < 0 ? 'text-red-400' : 'text-slate-400'
+  const pctColor = adjPct > 0 ? 'text-emerald-400' : adjPct < 0 ? 'text-red-400' : 'text-slate-600'
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-      <h3 className="text-white font-semibold mb-1 flex items-center gap-2">
+    <div className="bg-white border border-slate-200 rounded-2xl p-6">
+      <h3 className="text-slate-900 font-semibold mb-1 flex items-center gap-2">
         <Zap size={15} className="text-amber-400" />
         Scenario Simulation
       </h3>
@@ -558,7 +558,7 @@ function ScenarioPanel({ basePct, projectedPrice }) {
             className={`text-left p-3 rounded-xl border text-xs transition-all ${
               active === s.key
                 ? 'bg-blue-500/15 border-blue-500/40 text-blue-300'
-                : 'bg-slate-900/60 border-slate-700 text-slate-400 hover:border-slate-600'
+                : 'bg-[#F5F0E8]/60 border-slate-200 text-slate-600 hover:border-slate-300'
             }`}>
             <div className="font-semibold mb-0.5">{s.label}</div>
             <div className="text-slate-600 text-[10px]">{s.desc}</div>
@@ -570,14 +570,14 @@ function ScenarioPanel({ basePct, projectedPrice }) {
       </div>
 
       {projectedPrice > 0 && (
-        <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700">
+        <div className="bg-[#F5F0E8]/60 rounded-xl p-4 border border-slate-200">
           <p className="text-xs text-slate-500 mb-2">
             {scenario ? `Under: ${scenario.label}` : 'Base forecast'}
           </p>
           <div className="flex items-end justify-between">
             <div>
               <p className="text-[10px] text-slate-600 uppercase tracking-wide">90-Day Forecast</p>
-              <p className="text-2xl font-bold text-white">${adjPrice?.toLocaleString() ?? '—'}</p>
+              <p className="text-2xl font-bold text-slate-900">${adjPrice?.toLocaleString() ?? '—'}</p>
             </div>
             <div className="text-right">
               <p className="text-[10px] text-slate-600 uppercase tracking-wide">Change</p>
@@ -732,44 +732,44 @@ export default function AnalyzePage() {
     <div className="min-h-screen">
 
       {/* ── Hero / Form ── */}
-      <div className="bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700/50">
+      <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
             <Sparkles size={12} />
             8-Agent Pipeline · XGBoost · Prophet · GPT-4o-mini · Principled AI
           </div>
-          <h1 className="text-4xl font-extrabold text-white mb-1">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-1">
             AI Car Price <span className="text-blue-400">Intelligence</span>
           </h1>
-          <p className="text-slate-400 text-base mb-8 max-w-2xl">
+          <p className="text-slate-600 text-base mb-8 max-w-2xl">
             Multi-agent decision intelligence — transparent BUY / WAIT / MONITOR signals
             with explainable AI reasoning, risk assessment, and ethical guardrails.
           </p>
 
           {/* Form card */}
-          <div className="bg-slate-800/70 border border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
-            <h2 className="text-white font-semibold mb-4 flex items-center gap-2 text-sm">
+          <div className="bg-white/80 border border-slate-200 rounded-2xl p-6 backdrop-blur-sm">
+            <h2 className="text-slate-900 font-semibold mb-4 flex items-center gap-2 text-sm">
               <Car size={16} className="text-blue-400" />
               Configure Your Search
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
                 { label: 'Make',  node: (
-                  <select className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
                     value={form.make} onChange={e => { set('make', e.target.value); set('model', ''); set('year', '') }}>
                     <option value="">Select make</option>
                     {makes.map(m => <option key={m} value={m}>{m}</option>)}
                   </select>
                 )},
                 { label: 'Model', node: (
-                  <select className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
                     value={form.model} onChange={e => { set('model', e.target.value); set('year', '') }} disabled={!form.make}>
                     <option value="">Select model</option>
                     {models.map(m => <option key={m} value={m}>{m}</option>)}
                   </select>
                 )},
                 { label: 'Year', node: (
-                  <select className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none disabled:opacity-40"
                     value={form.year} onChange={e => set('year', e.target.value)} disabled={!form.model}>
                     <option value="">Year</option>
                     {years.map(y => <option key={y} value={y}>{y}</option>)}
@@ -777,24 +777,24 @@ export default function AnalyzePage() {
                 )},
                 { label: 'Mileage', node: (
                   <input type="number" min={0} max={300000} step={5000}
-                    className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
                     value={form.mileage} onChange={e => set('mileage', +e.target.value)} />
                 )},
                 { label: 'Condition', node: (
-                  <select className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
                     value={form.condition} onChange={e => set('condition', e.target.value)}>
                     {CONDITIONS.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 )},
                 { label: 'Region', node: (
-                  <select className="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                  <select className="w-full bg-[#F5F0E8] border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none"
                     value={form.region} onChange={e => set('region', e.target.value)}>
                     {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
                 )},
               ].map(({ label, node }) => (
                 <div key={label}>
-                  <label className="text-xs font-medium text-slate-400 block mb-1.5">{label}</label>
+                  <label className="text-xs font-medium text-slate-600 block mb-1.5">{label}</label>
                   {node}
                 </div>
               ))}
@@ -807,8 +807,8 @@ export default function AnalyzePage() {
                 disabled={loading || !form.make || !form.model || !form.year}
                 className={`flex items-center gap-2 px-7 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                   loading || !form.make || !form.model || !form.year
-                    ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
-                    : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40'
+                    ? 'bg-slate-100 text-slate-500 cursor-not-allowed'
+                    : 'bg-blue-600 hover:bg-blue-500 text-slate-900 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40'
                 }`}
               >
                 {loading
@@ -831,7 +831,7 @@ export default function AnalyzePage() {
                   <button
                     key={demo.label}
                     onClick={() => loadDemo(demo)}
-                    className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all"
+                    className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg bg-[#F5F0E8]/80 border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-all"
                   >
                     <span>{demo.emoji}</span>
                     <span>{demo.label}</span>
@@ -860,14 +860,14 @@ export default function AnalyzePage() {
         {loading && (
           <div className="mt-8 space-y-4 animate-pulse">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="h-52 bg-slate-800 rounded-2xl" />
+              <div className="h-52 bg-white rounded-2xl" />
               <div className="col-span-2 grid grid-cols-2 gap-4">
-                {[1,2,3,4].map(i => <div key={i} className="h-24 bg-slate-800 rounded-2xl" />)}
+                {[1,2,3,4].map(i => <div key={i} className="h-24 bg-white rounded-2xl" />)}
               </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <div className="lg:col-span-3 h-64 bg-slate-800 rounded-2xl" />
-              <div className="lg:col-span-2 h-64 bg-slate-800 rounded-2xl" />
+              <div className="lg:col-span-3 h-64 bg-white rounded-2xl" />
+              <div className="lg:col-span-2 h-64 bg-white rounded-2xl" />
             </div>
           </div>
         )}
@@ -880,12 +880,12 @@ export default function AnalyzePage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
               {/* Signal card with gauge + volatility */}
-              <div className={`bg-gradient-to-br ${sigCfg.grad} rounded-2xl p-6 text-white shadow-2xl ${sigCfg.shadow}`}>
+              <div className={`bg-gradient-to-br ${sigCfg.grad} rounded-2xl p-6 text-slate-900 shadow-2xl ${sigCfg.shadow}`}>
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <p className="text-white/65 text-xs font-semibold uppercase tracking-widest">AI Recommendation</p>
+                    <p className="text-slate-900/65 text-xs font-semibold uppercase tracking-widest">AI Recommendation</p>
                     <p className="text-5xl font-black mt-1 tracking-tight leading-none">{finalRec}</p>
-                    <p className="text-white/80 text-sm mt-1.5">{sigCfg.label}</p>
+                    <p className="text-slate-900/80 text-sm mt-1.5">{sigCfg.label}</p>
                   </div>
                   <div className="p-3 bg-white/20 rounded-xl">
                     <SigIcon size={22} />
@@ -902,8 +902,8 @@ export default function AnalyzePage() {
                       <div className="w-px h-12 bg-white/20" />
                       <div className="flex flex-col items-center">
                         <p className="text-xl font-bold">{riskScore}</p>
-                        <p className="text-[10px] text-white/60">Risk Score</p>
-                        <p className="text-[9px] text-white/40">/ 100</p>
+                        <p className="text-[10px] text-slate-900/60">Risk Score</p>
+                        <p className="text-[9px] text-slate-900/40">/ 100</p>
                       </div>
                     </>
                   )}
@@ -912,7 +912,7 @@ export default function AnalyzePage() {
                 {/* 90-day change */}
                 {chg90d !== undefined && (
                   <div className="mt-3 flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
-                    <span className="text-xs text-white/60">90-day forecast</span>
+                    <span className="text-xs text-slate-900/60">90-day forecast</span>
                     <span className="text-sm font-bold">
                       {chg90d > 0 ? '+' : ''}{chg90d}%
                     </span>
@@ -924,7 +924,7 @@ export default function AnalyzePage() {
               <div className="col-span-2 grid grid-cols-2 gap-4">
                 {[
                   {
-                    icon: DollarSign, label: 'Predicted Fair Value', color: 'text-white',
+                    icon: DollarSign, label: 'Predicted Fair Value', color: 'text-slate-900',
                     value: result.predicted_price
                       ? <>${<AnimatedNumber value={result.predicted_price} />}</>
                       : '—',
@@ -944,7 +944,7 @@ export default function AnalyzePage() {
                         : '',
                   },
                   {
-                    icon: Package, label: 'Active Listings', color: 'text-white',
+                    icon: Package, label: 'Active Listings', color: 'text-slate-900',
                     value: mktCtx?.current_inventory_count ?? '—',
                     sub: mktCtx ? `${mktCtx.inventory_trend} trend` : '',
                   },
@@ -960,7 +960,7 @@ export default function AnalyzePage() {
                       : '',
                   },
                 ].map(({ icon: Icon, label, color, value, sub }) => (
-                  <div key={label} className="bg-slate-800 border border-slate-700 rounded-2xl p-5">
+                  <div key={label} className="bg-white border border-slate-200 rounded-2xl p-5">
                     <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium uppercase tracking-wide mb-2">
                       <Icon size={11} />{label}
                     </div>
@@ -975,9 +975,9 @@ export default function AnalyzePage() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
               {/* Price history & forecast chart */}
-              <div className="lg:col-span-3 bg-slate-800 border border-slate-700 rounded-2xl p-6">
+              <div className="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-6">
                 <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-                  <h3 className="text-white font-semibold">Price History &amp; Forecast</h3>
+                  <h3 className="text-slate-900 font-semibold">Price History &amp; Forecast</h3>
                   {forecastMethod && (
                     <span className={`text-xs px-2.5 py-1 rounded-full font-semibold border ${
                       forecastMethod === 'llm_blended'
@@ -987,7 +987,7 @@ export default function AnalyzePage() {
                           : forecastMethod === 'linear'
                             ? 'bg-amber-500/15 text-amber-400 border-amber-500/20'
                             : forecastMethod === 'industry_default'
-                              ? 'bg-slate-500/15 text-slate-400 border-slate-500/20'
+                              ? 'bg-slate-500/15 text-slate-600 border-slate-500/20'
                               : 'bg-blue-500/15 text-blue-400 border-blue-500/20'
                     }`}>
                       {forecastMethod === 'llm_blended'      ? '✦ AI-Enhanced' :
@@ -1010,12 +1010,12 @@ export default function AnalyzePage() {
                           <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                      <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#64748b' }} />
-                      <YAxis tickFormatter={v => v ? `$${(v/1000).toFixed(0)}k` : ''} tick={{ fontSize: 10, fill: '#64748b' }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                      <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#475569' }} />
+                      <YAxis tickFormatter={v => v ? `$${(v/1000).toFixed(0)}k` : ''} tick={{ fontSize: 10, fill: '#475569' }} />
                       <Tooltip {...chartTooltipStyle}
                         formatter={(v, n) => v ? [`$${Number(v).toLocaleString()}`, n] : [null, null]} />
-                      <Legend wrapperStyle={{ color: '#64748b', fontSize: 11 }} />
+                      <Legend wrapperStyle={{ color: '#475569', fontSize: 11 }} />
                       {chartData.some(d => d.historical) && (
                         <ReferenceLine x="Now" stroke="#334155" strokeDasharray="4 4"
                           label={{ value: 'Today', fontSize: 9, fill: '#475569', position: 'top' }} />
@@ -1039,11 +1039,11 @@ export default function AnalyzePage() {
                 {/* Forecast summary row */}
                 {result.forecast_30d > 0 && (
                   <div className="grid grid-cols-2 gap-3 mt-4">
-                    <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                    <div className="bg-[#F5F0E8]/60 rounded-lg p-3 text-center">
                       <p className="text-[10px] text-slate-500 uppercase tracking-wide mb-1">30-Day Forecast</p>
                       <p className="text-lg font-bold text-emerald-400">${Number(result.forecast_30d).toLocaleString()}</p>
                     </div>
-                    <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                    <div className="bg-[#F5F0E8]/60 rounded-lg p-3 text-center">
                       <p className="text-[10px] text-slate-500 uppercase tracking-wide mb-1">90-Day Forecast</p>
                       <p className="text-lg font-bold text-emerald-300">${Number(result.forecast_90d).toLocaleString()}</p>
                       {uncRange && (
@@ -1057,10 +1057,10 @@ export default function AnalyzePage() {
               </div>
 
               {/* AI Reasoning */}
-              <div className="lg:col-span-2 bg-slate-800 border border-slate-700 rounded-2xl p-6 flex flex-col">
+              <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
                   <Sparkles size={17} className="text-blue-400" />
-                  <h3 className="text-white font-semibold">AI Analyst Reasoning</h3>
+                  <h3 className="text-slate-900 font-semibold">AI Analyst Reasoning</h3>
                 </div>
 
                 {/* New structured reasoning bullets */}
@@ -1069,13 +1069,13 @@ export default function AnalyzePage() {
                     {reasoning.map((bullet, i) => (
                       <div key={i} className="flex gap-2.5">
                         <ChevronRight size={14} className="text-blue-400 mt-0.5 flex-shrink-0" />
-                        <p className="text-slate-300 text-sm leading-relaxed">{bullet}</p>
+                        <p className="text-slate-600 text-sm leading-relaxed">{bullet}</p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="bg-slate-900/60 border-l-2 border-blue-500 pl-4 py-3 rounded-r-lg mb-3 flex-1">
-                    <p className="text-slate-300 text-sm leading-relaxed italic">{result.explanation}</p>
+                  <div className="bg-[#F5F0E8]/60 border-l-2 border-blue-500 pl-4 py-3 rounded-r-lg mb-3 flex-1">
+                    <p className="text-slate-600 text-sm leading-relaxed italic">{result.explanation}</p>
                   </div>
                 )}
 
@@ -1101,7 +1101,7 @@ export default function AnalyzePage() {
                         <div key={i} className="flex items-center gap-2">
                           <div className={`w-2 h-2 rounded-full flex-shrink-0
                             ${f.direction === 'increases price' ? 'bg-emerald-400' : 'bg-red-400'}`} />
-                          <span className="text-xs text-slate-400 flex-1 capitalize">
+                          <span className="text-xs text-slate-600 flex-1 capitalize">
                             {f.feature.replace(/_/g, ' ')}
                           </span>
                           <span className={`text-xs font-bold
@@ -1125,15 +1125,15 @@ export default function AnalyzePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
               {shapChartData.length > 0 && (
-                <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-                  <h3 className="text-white font-semibold mb-1">ML Price Factor Breakdown</h3>
+                <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                  <h3 className="text-slate-900 font-semibold mb-1">ML Price Factor Breakdown</h3>
                   <p className="text-slate-500 text-xs mb-4">
                     SHAP values — how each feature shifts the XGBoost price prediction
                   </p>
                   <ResponsiveContainer width="100%" height={220}>
                     <BarChart data={shapChartData} layout="vertical" margin={{ left: 10, right: 20 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                      <XAxis type="number" tick={{ fontSize: 10, fill: '#64748b' }} tickFormatter={v => v.toFixed(0)} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
+                      <XAxis type="number" tick={{ fontSize: 10, fill: '#475569' }} tickFormatter={v => v.toFixed(0)} />
                       <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: '#cbd5e1' }} width={110} />
                       <Tooltip {...chartTooltipStyle}
                         formatter={(v, _, p) => [v.toFixed(2), p.payload.dir === 'increases price' ? 'Increases price' : 'Decreases price']} />
@@ -1148,8 +1148,8 @@ export default function AnalyzePage() {
               )}
 
               {/* Agent Reasoning Log */}
-              <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-                <h3 className="text-white font-semibold mb-5 flex items-center gap-2">
+              <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                <h3 className="text-slate-900 font-semibold mb-5 flex items-center gap-2">
                   <Cpu size={16} className="text-blue-400" />
                   Agent Reasoning Log
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20 font-semibold">
@@ -1175,12 +1175,12 @@ export default function AnalyzePage() {
               {/* Transparency + Ethics */}
               <div className="space-y-4">
                 {transpNote && (
-                  <div className="bg-slate-800 border border-slate-700 rounded-2xl p-5">
+                  <div className="bg-white border border-slate-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 mb-2">
                       <Eye size={14} className="text-blue-400" />
-                      <h4 className="text-white font-semibold text-sm">Transparency Note</h4>
+                      <h4 className="text-slate-900 font-semibold text-sm">Transparency Note</h4>
                     </div>
-                    <p className="text-slate-400 text-xs leading-relaxed">{transpNote}</p>
+                    <p className="text-slate-600 text-xs leading-relaxed">{transpNote}</p>
                   </div>
                 )}
                 {biasStat && (
@@ -1193,10 +1193,10 @@ export default function AnalyzePage() {
                   </div>
                 )}
                 {ethicsDiscl && (
-                  <div className="bg-slate-800 border border-slate-700 rounded-2xl p-5">
+                  <div className="bg-white border border-slate-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 mb-2">
                       <Shield size={14} className="text-emerald-400" />
-                      <h4 className="text-white font-semibold text-sm">Ethics Disclaimer</h4>
+                      <h4 className="text-slate-900 font-semibold text-sm">Ethics Disclaimer</h4>
                     </div>
                     <p className="text-slate-500 text-xs leading-relaxed">{ethicsDiscl}</p>
                   </div>
@@ -1213,10 +1213,10 @@ export default function AnalyzePage() {
 
             {/* Heading */}
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-slate-800 border border-slate-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-white border border-slate-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Search size={28} className="text-slate-600" />
               </div>
-              <h3 className="text-slate-300 font-semibold text-xl">Select a vehicle above — or try a demo</h3>
+              <h3 className="text-slate-600 font-semibold text-xl">Select a vehicle above — or try a demo</h3>
               <p className="text-slate-600 text-sm mt-1.5 max-w-md mx-auto">
                 Live demos show BUY NOW · WAIT · MONITOR across different market signals
               </p>
@@ -1228,24 +1228,24 @@ export default function AnalyzePage() {
                 <button
                   key={demo.label}
                   onClick={() => loadDemo(demo)}
-                  className="group text-left bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-slate-500 rounded-2xl p-4 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                  className="group text-left bg-white hover:bg-slate-750 border border-slate-200 hover:border-slate-300 rounded-2xl p-4 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
                 >
                   {/* Emoji + signal badge */}
                   <div className="flex items-start justify-between mb-3">
                     <span className="text-2xl">{demo.emoji}</span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-gradient-to-r ${demo.tagGrad} text-white shadow-sm`}>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-gradient-to-r ${demo.tagGrad} text-slate-900 shadow-sm`}>
                       {demo.tag}
                     </span>
                   </div>
 
                   {/* Vehicle name */}
-                  <p className="text-white text-sm font-semibold leading-tight">{demo.label}</p>
-                  <p className="text-slate-400 text-[11px] leading-snug mt-1">{demo.desc}</p>
+                  <p className="text-slate-900 text-sm font-semibold leading-tight">{demo.label}</p>
+                  <p className="text-slate-600 text-[11px] leading-snug mt-1">{demo.desc}</p>
 
                   {/* Stat + arrow */}
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-700/60">
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-200/80">
                     <span className={`text-[11px] font-bold ${demo.tagText}`}>{demo.stat}</span>
-                    <ChevronRight size={12} className="text-slate-600 group-hover:text-slate-400 transition-colors" />
+                    <ChevronRight size={12} className="text-slate-600 group-hover:text-slate-600 transition-colors" />
                   </div>
                 </button>
               ))}

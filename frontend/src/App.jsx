@@ -12,7 +12,7 @@ import NegotiationHelperPage  from './pages/NegotiationHelperPage'
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-slate-900 flex flex-col text-white">
+      <div className="min-h-screen bg-[#F5F0E8] flex flex-col text-slate-900">
         <Navbar />
         <main className="flex-1 pt-16">
           <Routes>

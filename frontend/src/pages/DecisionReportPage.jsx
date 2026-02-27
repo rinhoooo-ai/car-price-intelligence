@@ -184,16 +184,16 @@ export default function DecisionReportPage() {
     <div className="min-h-screen">
 
       {/* ── Hero / Vehicle selector ── */}
-      <div className="bg-gradient-to-b from-slate-800 to-slate-900 border-b border-slate-700/50 no-print">
+      <div className="bg-gradient-to-b from-slate-100 to-[#F5F0E8] border-b border-slate-200/80 no-print">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
             <BarChart2 size={12} />
             AI Decision Report · Full Intelligence Brief
           </div>
-          <h1 className="text-4xl font-extrabold text-white mb-2">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
             AI Decision <span className="text-blue-400">Report</span>
           </h1>
-          <p className="text-slate-400 text-sm mb-6 max-w-2xl">
+          <p className="text-slate-600 text-sm mb-6 max-w-2xl">
             Select a vehicle to generate a full AI intelligence brief. Download as PDF for offline review.
           </p>
 
@@ -203,7 +203,7 @@ export default function DecisionReportPage() {
                 className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                   selectedId === v.id
                     ? 'bg-blue-500/20 border-blue-500/40 text-blue-300'
-                    : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-600'
+                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                 }`}>
                 {v.label}
                 <span className={`ml-2 text-xs font-bold ${v.recColor}`}>{v.rec}</span>
@@ -213,12 +213,12 @@ export default function DecisionReportPage() {
 
           <div className="flex gap-3">
             <button onClick={handlePrint}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-500/20">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-slate-900 font-semibold text-sm transition-all shadow-lg shadow-blue-500/20">
               <Download size={15} />
               Download PDF Report
             </button>
             <button onClick={handlePrint}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold text-sm transition-all">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-600 text-slate-600 font-semibold text-sm transition-all">
               <Printer size={15} />
               Print Report
             </button>
@@ -230,13 +230,13 @@ export default function DecisionReportPage() {
       <div ref={reportRef} className="max-w-7xl mx-auto px-6 py-8 space-y-6 print-area">
 
         {/* Report header */}
-        <div className="flex items-center justify-between flex-wrap gap-4 pb-4 border-b border-slate-700">
+        <div className="flex items-center justify-between flex-wrap gap-4 pb-4 border-b border-slate-200">
           <div>
             <p className="text-slate-500 text-xs uppercase tracking-widest">CarIntel AI Decision Report</p>
-            <h2 className="text-2xl font-black text-white mt-0.5">{label}</h2>
+            <h2 className="text-2xl font-black text-slate-900 mt-0.5">{label}</h2>
             <p className="text-slate-500 text-xs mt-1">Generated: {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
-          <div className={`bg-gradient-to-br ${recGrad} px-6 py-3 rounded-2xl text-white font-black text-2xl shadow-lg`}>
+          <div className={`bg-gradient-to-br ${recGrad} px-6 py-3 rounded-2xl text-slate-900 font-black text-2xl shadow-lg`}>
             {rec}
           </div>
         </div>
@@ -247,16 +247,16 @@ export default function DecisionReportPage() {
           {/* Summary metrics */}
           <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: 'Current Fair Value',    value: `$${current_price.toLocaleString()}`,    color: 'text-white' },
+              { label: 'Current Fair Value',    value: `$${current_price.toLocaleString()}`,    color: 'text-slate-900' },
               { label: '90-Day Forecast',       value: `$${projected_price.toLocaleString()}`,  color: change >= 0 ? 'text-emerald-400' : 'text-red-400' },
               { label: 'Projected Change',      value: `${change > 0 ? '+' : ''}${change}%`,   color: change >= 0 ? 'text-emerald-400' : 'text-red-400' },
               { label: 'Confidence Score',      value: `${confidence}%`, color: 'text-blue-400' },
               { label: 'Volatility',            value: volatility,       color: volColor ? '' : '' },
               { label: 'Risk Score',            value: `${risk}/100`,    color: risk < 40 ? 'text-emerald-400' : risk < 65 ? 'text-amber-400' : 'text-red-400' },
-              { label: 'Uncertainty Low',       value: `$${unc_low.toLocaleString()}`,          color: 'text-slate-300' },
-              { label: 'Uncertainty High',      value: `$${unc_high.toLocaleString()}`,         color: 'text-slate-300' },
+              { label: 'Uncertainty Low',       value: `$${unc_low.toLocaleString()}`,          color: 'text-slate-600' },
+              { label: 'Uncertainty High',      value: `$${unc_high.toLocaleString()}`,         color: 'text-slate-600' },
             ].map(m => (
-              <div key={m.label} className="bg-slate-800 border border-slate-700 rounded-xl p-3">
+              <div key={m.label} className="bg-white border border-slate-200 rounded-xl p-3">
                 <p className="text-slate-500 text-[10px] uppercase tracking-wide mb-1">{m.label}</p>
                 <p className={`text-lg font-bold ${m.color}`}>{m.value}</p>
               </div>
@@ -264,8 +264,8 @@ export default function DecisionReportPage() {
           </div>
 
           {/* Radar chart */}
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-5">
-            <h3 className="text-white font-semibold text-sm mb-3">Market Position Radar</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl p-5">
+            <h3 className="text-slate-900 font-semibold text-sm mb-3">Market Position Radar</h3>
             <ResponsiveContainer width="100%" height={180}>
               <RadarChart data={radar} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
                 <PolarGrid stroke="#334155" />
@@ -281,8 +281,8 @@ export default function DecisionReportPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* AI Reasoning */}
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h3 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
               <Bot size={16} className="text-blue-400" />
               AI Analyst Reasoning
             </h3>
@@ -292,17 +292,17 @@ export default function DecisionReportPage() {
                   <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <span className="text-blue-400 text-xs font-bold">{i + 1}</span>
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed">{r}</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">{r}</p>
                 </div>
               ))}
             </div>
 
             {/* Uncertainty range bar */}
-            <div className="mt-5 bg-slate-900/60 rounded-xl p-4">
+            <div className="mt-5 bg-[#F5F0E8]/60 rounded-xl p-4">
               <p className="text-slate-500 text-xs mb-2">90-Day Price Range ({volatility} volatility)</p>
               <div className="flex items-center gap-2">
                 <span className="text-red-400 text-xs font-bold">${unc_low.toLocaleString()}</span>
-                <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                   <div className="h-2 rounded-full"
                     style={{ background: `linear-gradient(to right, #ef4444, #10b981)`, width: '100%' }} />
                 </div>
@@ -313,16 +313,16 @@ export default function DecisionReportPage() {
           </div>
 
           {/* Scenario Impact */}
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6">
+            <h3 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
               <Zap size={16} className="text-amber-400" />
               Scenario Impact Analysis
             </h3>
             <div className="space-y-3">
               {scenarios.map((s, i) => (
-                <div key={i} className="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+                <div key={i} className="bg-[#F5F0E8]/60 border border-slate-200 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-white font-medium text-sm">{s.name}</span>
+                    <span className="text-slate-900 font-medium text-sm">{s.name}</span>
                     <span className={`text-xs font-bold ${s.delta > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                       {s.delta > 0 ? '+' : ''}{s.delta}% adjustment
                     </span>
@@ -338,8 +338,8 @@ export default function DecisionReportPage() {
         </div>
 
         {/* Agent Reasoning Log */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6">
-          <h3 className="text-white font-semibold mb-5 flex items-center gap-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
+          <h3 className="text-slate-900 font-semibold mb-5 flex items-center gap-2">
             <Cpu size={16} className="text-blue-400" />
             Agent Reasoning Chain
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20 font-semibold">
@@ -357,11 +357,11 @@ export default function DecisionReportPage() {
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center mt-0.5 ${scColor}`}>
                       <IconComp size={12} />
                     </div>
-                    {!isLast && <div className="w-px flex-1 bg-slate-700/60 my-1" />}
+                    {!isLast && <div className="w-px flex-1 bg-slate-100/60 my-1" />}
                   </div>
                   <div className={`flex-1 ${isLast ? 'pb-0' : 'pb-3'}`}>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-white">{entry.agent}</span>
+                      <span className="text-xs font-semibold text-slate-900">{entry.agent}</span>
                       <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
                         entry.status === 'ok' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-amber-500/15 text-amber-400'
                       }`}>{entry.status}</span>
@@ -376,12 +376,12 @@ export default function DecisionReportPage() {
 
         {/* Transparency + Ethics */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-5">
+          <div className="bg-white border border-slate-200 rounded-2xl p-5">
             <div className="flex items-center gap-2 mb-2">
               <Eye size={14} className="text-blue-400" />
-              <h4 className="text-white font-semibold text-sm">Transparency Note</h4>
+              <h4 className="text-slate-900 font-semibold text-sm">Transparency Note</h4>
             </div>
-            <p className="text-slate-400 text-xs leading-relaxed">{transparency}</p>
+            <p className="text-slate-600 text-xs leading-relaxed">{transparency}</p>
           </div>
           <div className="bg-amber-500/8 border border-amber-500/20 rounded-2xl p-5">
             <div className="flex items-center gap-2 mb-2">
@@ -393,10 +393,10 @@ export default function DecisionReportPage() {
         </div>
 
         {/* Ethics footer */}
-        <div className="bg-slate-800 border border-slate-700 rounded-2xl p-5 text-center">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 text-center">
           <Shield size={18} className="text-emerald-400 mx-auto mb-2" />
           <p className="text-slate-500 text-xs max-w-2xl mx-auto">
-            <span className="text-slate-300 font-semibold">Advisory Only: </span>
+            <span className="text-slate-600 font-semibold">Advisory Only: </span>
             CarIntel provides data-driven price intelligence for informational purposes only.
             This report is generated by AI models — not human financial advice.
             Always verify with a licensed dealer or independent inspection before purchasing.
@@ -410,10 +410,10 @@ export default function DecisionReportPage() {
           .no-print { display: none !important; }
           body { background: white !important; color: black !important; }
           .print-area { padding: 0 !important; }
-          .bg-slate-800, .bg-slate-900 { background: #f8fafc !important; }
-          .text-white { color: #1e293b !important; }
-          .text-slate-400 { color: #475569 !important; }
-          .border-slate-700 { border-color: #e2e8f0 !important; }
+          .bg-white, .bg-[#F5F0E8] { background: #f8fafc !important; }
+          .text-slate-900 { color: #1e293b !important; }
+          .text-slate-600 { color: #475569 !important; }
+          .border-slate-200 { border-color: #e2e8f0 !important; }
         }
       `}</style>
     </div>

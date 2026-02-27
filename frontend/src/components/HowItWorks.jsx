@@ -52,14 +52,14 @@ export default function HowItWorks() {
                 <div className="text-xs opacity-70 leading-tight">{step.desc}</div>
               </div>
               {i < PIPELINE.length - 1 && (
-                <span className="text-slate-400 font-bold text-lg flex-shrink-0">→</span>
+                <span className="text-slate-600 font-bold text-lg flex-shrink-0">→</span>
               )}
             </div>
           ))}
         </div>
 
         {/* Tools row label */}
-        <div className="mt-4 flex items-center gap-2 text-xs text-slate-400">
+        <div className="mt-4 flex items-center gap-2 text-xs text-slate-600">
           <div className="h-px flex-1 bg-slate-200" />
           <span className="px-2">Steps 3–6 are parallel tool calls; Step 7 is rule-based logic, not an LLM call</span>
           <div className="h-px flex-1 bg-slate-200" />
@@ -91,7 +91,7 @@ export default function HowItWorks() {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="h-32 flex items-center justify-center text-slate-400 text-sm">
+          <div className="h-32 flex items-center justify-center text-slate-600 text-sm">
             SHAP data unavailable — ensure shap_data.pkl is in models/
           </div>
         )}

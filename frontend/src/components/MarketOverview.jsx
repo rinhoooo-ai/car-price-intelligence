@@ -86,7 +86,7 @@ export default function MarketOverview() {
             <div className={`h-2 rounded-full transition-all ${heatScore > 65 ? 'bg-red-500' : heatScore < 35 ? 'bg-blue-500' : 'bg-amber-500'}`}
               style={{ width: `${heatScore}%` }} />
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             {heatScore > 65 ? 'Hot — seller\'s market' : heatScore < 35 ? 'Cool — buyer\'s market' : 'Balanced market'}
           </p>
         </div>
@@ -131,7 +131,7 @@ export default function MarketOverview() {
             </tbody>
           </table>
         ) : (
-          <div className="px-5 py-10 text-center text-slate-400 text-sm">
+          <div className="px-5 py-10 text-center text-slate-600 text-sm">
             No BUY signals cached yet. Run some analyses in the Analyze tab first.
           </div>
         )}
@@ -156,9 +156,9 @@ export default function MarketOverview() {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="flex items-center justify-center h-40 text-slate-400 text-sm">No seasonality data available</div>
+          <div className="flex items-center justify-center h-40 text-slate-600 text-sm">No seasonality data available</div>
         )}
-        <p className="text-xs text-slate-400 mt-3">Data as of: {data.updated_at} &nbsp;·&nbsp; Source: Craigslist listings snapshot</p>
+        <p className="text-xs text-slate-600 mt-3">Data as of: {data.updated_at} &nbsp;·&nbsp; Source: Craigslist listings snapshot</p>
       </div>
 
     </div>

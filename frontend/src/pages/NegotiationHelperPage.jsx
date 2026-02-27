@@ -39,7 +39,7 @@ const STEPS = [
 
 export default function NegotiationHelperPage() {
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-[#F5F0E8] text-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
 
         {/* Header */}
@@ -53,10 +53,10 @@ export default function NegotiationHelperPage() {
             <div className="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
               <Handshake size={24} className="text-blue-400" />
             </div>
-            <h1 className="text-4xl font-bold text-white">Negotiation Helper</h1>
+            <h1 className="text-4xl font-bold text-slate-900">Negotiation Helper</h1>
           </div>
 
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
             Get AI-calculated offer prices, walk-away thresholds, and negotiation
             talking points specific to your vehicle — so you walk in confident and
             walk out with the best deal.
@@ -71,7 +71,7 @@ export default function NegotiationHelperPage() {
                 <span className="w-7 h-7 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-bold flex-shrink-0">
                   {step}
                 </span>
-                <span className="text-slate-300 text-sm font-medium whitespace-nowrap">{label}</span>
+                <span className="text-slate-600 text-sm font-medium whitespace-nowrap">{label}</span>
               </div>
               {i < STEPS.length - 1 && (
                 <ChevronRight size={16} className="text-slate-600 flex-shrink-0" />
@@ -94,16 +94,16 @@ export default function NegotiationHelperPage() {
                 <Icon size={20} style={{ color }} />
               </div>
               <div>
-                <h3 className="text-white font-semibold text-sm mb-1">{title}</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">{desc}</p>
+                <h3 className="text-slate-900 font-semibold text-sm mb-1">{title}</h3>
+                <p className="text-slate-600 text-xs leading-relaxed">{desc}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Placeholder CTA */}
-        <div className="rounded-xl border border-slate-700/50 bg-slate-800/40 p-8 text-center">
-          <p className="text-slate-400 text-sm mb-1">
+        <div className="rounded-xl border border-slate-200/80 bg-white/80 p-8 text-center">
+          <p className="text-slate-600 text-sm mb-1">
             This feature is currently in development.
           </p>
           <p className="text-slate-500 text-xs">

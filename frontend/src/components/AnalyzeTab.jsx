@@ -149,7 +149,7 @@ export default function AnalyzeTab() {
           </div>
         </div>
         <button id="analyze-btn" onClick={analyze} disabled={loading || !form.make || !form.model || !form.year}
-          className="mt-4 px-8 py-2.5 bg-indigo-600 text-white rounded-lg font-semibold text-sm
+          className="mt-4 px-8 py-2.5 bg-indigo-600 text-slate-900 rounded-lg font-semibold text-sm
             hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
           {loading ? 'Analyzing…' : 'Analyze Now'}
         </button>
@@ -165,9 +165,9 @@ export default function AnalyzeTab() {
           {/* Left: Recommendation + stats */}
           <div className="lg:col-span-2 space-y-4">
             {/* Badge */}
-            <div className={`${BADGE[rec] ?? 'bg-slate-500'} rounded-2xl p-6 text-white text-center shadow-lg`}>
+            <div className={`${BADGE[rec] ?? 'bg-slate-500'} rounded-2xl p-6 text-slate-900 text-center shadow-lg`}>
               <div className="text-5xl font-black tracking-wider">{rec}</div>
-              <div className="text-white/80 text-sm mt-1 font-medium">{conf} confidence</div>
+              <div className="text-slate-900/80 text-sm mt-1 font-medium">{conf} confidence</div>
               {/* Confidence bar */}
               <div className="mt-3 bg-white/20 rounded-full h-2">
                 <div className="bg-white rounded-full h-2 transition-all"
@@ -188,7 +188,7 @@ export default function AnalyzeTab() {
                   <div key={s.label} className="bg-slate-50 rounded-lg p-3">
                     <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
                     <div className="text-xs text-slate-500">{s.label}</div>
-                    <div className="text-xs text-slate-400">{s.sub}</div>
+                    <div className="text-xs text-slate-600">{s.sub}</div>
                   </div>
                 ))}
               </div>
@@ -208,7 +208,7 @@ export default function AnalyzeTab() {
                         {' '}<span className={`text-xs font-medium ${f.direction === 'increases price' ? 'text-emerald-600' : 'text-red-500'}`}>
                           {f.direction}
                         </span>
-                        {' '}<span className="text-slate-400">(impact {f.impact})</span>
+                        {' '}<span className="text-slate-600">(impact {f.impact})</span>
                       </span>
                     </li>
                   ))}
@@ -238,7 +238,7 @@ export default function AnalyzeTab() {
                   </ComposedChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="flex items-center justify-center h-48 text-slate-400 text-sm">No historical data for this vehicle</div>
+                <div className="flex items-center justify-center h-48 text-slate-600 text-sm">No historical data for this vehicle</div>
               )}
               <div className="flex items-center gap-2 mt-2">
                 {fc?.method && (
@@ -247,7 +247,7 @@ export default function AnalyzeTab() {
                   </span>
                 )}
                 {fc?.seasonality_note && (
-                  <p className="text-xs text-slate-400 italic">{fc.seasonality_note}</p>
+                  <p className="text-xs text-slate-600 italic">{fc.seasonality_note}</p>
                 )}
               </div>
             </div>
@@ -269,10 +269,10 @@ export default function AnalyzeTab() {
                         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${isErr ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-700'}`}>
                           {isErr ? 'error' : 'ok'}
                         </span>
-                        <span className="text-slate-400 text-xs">{open ? '▲' : '▼'}</span>
+                        <span className="text-slate-600 text-xs">{open ? '▲' : '▼'}</span>
                       </button>
                       {open && (
-                        <pre className="px-4 py-3 bg-slate-900 text-slate-200 text-xs overflow-x-auto max-h-48 leading-relaxed">
+                        <pre className="px-4 py-3 bg-[#F5F0E8] text-slate-700 text-xs overflow-x-auto max-h-48 leading-relaxed">
                           {JSON.stringify(output, null, 2)}
                         </pre>
                       )}
